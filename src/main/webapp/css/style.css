@@ -1,0 +1,16 @@
+input {
+    display: table-caption;
+}
+
+table, th, td {
+    border: 2px solid navy;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+}
+
+<!--
+.tab { margin-left: 335px; }
+-->
