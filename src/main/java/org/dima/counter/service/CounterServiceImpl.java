@@ -2,10 +2,12 @@ package org.dima.counter.service;
 
 import org.dima.counter.entity.WeeklyReport;
 
+@org.springframework.stereotype.Service
 public class ServiceImpl implements Service {
-    @Override
-    public void addReport() {
 
+    @Override
+    public WeeklyReport addReport() {
+        return null;
     }
 
     @Override

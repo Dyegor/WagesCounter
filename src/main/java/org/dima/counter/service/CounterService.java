@@ -3,7 +3,7 @@ package org.dima.counter.service;
 import org.dima.counter.entity.WeeklyReport;
 
 public interface Service {
-    void addReport();
+    WeeklyReport addReport();
 
     void deleteReport();
 
