@@ -1,13 +1,14 @@
 package org.dima.counter.dao;
 
-import org.dima.counter.entity.WeeklyReport;
+import org.dima.counter.entity.DailyReport;
+import org.dima.counter.entity.WeeklyHoursList;
 
-public interface Dao {
-    void addReport();
+public interface CounterDao {
+    void addWeeklyReport(DailyReport dailyReport);
 
     void deleteReport();
 
     void updateReport();
 
-    WeeklyReport getReportById(int id);
+    WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
 }

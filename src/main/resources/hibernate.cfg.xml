@@ -16,6 +16,6 @@
 
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="org.dima.counter.entity.WeeklyReport"/>
+        <mapping class="org.dima.counter.entity.DailyReport"/>
     </session-factory>
 </hibernate-configuration>

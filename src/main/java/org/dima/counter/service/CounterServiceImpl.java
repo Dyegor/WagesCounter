@@ -1,13 +1,20 @@
 package org.dima.counter.service;
 
-import org.dima.counter.entity.WeeklyReport;
+import org.dima.counter.dao.CounterDao;
+import org.dima.counter.entity.DailyReport;
+import org.dima.counter.entity.WeeklyHoursList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@org.springframework.stereotype.Service
-public class ServiceImpl implements Service {
+@Service
+public class CounterServiceImpl implements CounterService {
+
+    @Autowired
+    private CounterDao counterDao;
 
     @Override
-    public WeeklyReport addReport() {
-        return null;
+    public void addWeeklyReport(DailyReport dailyReport) {
+        counterDao.addWeeklyReport(dailyReport);
     }
 
     @Override
@@ -21,7 +28,7 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public WeeklyReport getReportById(int id) {
-        return null;
+    public WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate) {
+        return counterDao.getWeeklyHoursListByDate(weekEndingDate);
     }
 }

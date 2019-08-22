@@ -1,19 +1,19 @@
 package org.dima.counter.entity;
 
 public class User {
-    private int ID;
+    private int Id;
     private String nickname;
     private String password;
     private String name;
     private String position;
     private int hourlyRate;
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return Id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     public String getNickname() {

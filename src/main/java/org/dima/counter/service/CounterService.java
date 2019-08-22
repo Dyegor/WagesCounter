@@ -1,13 +1,14 @@
 package org.dima.counter.service;
 
-import org.dima.counter.entity.WeeklyReport;
+import org.dima.counter.entity.DailyReport;
+import org.dima.counter.entity.WeeklyHoursList;
 
-public interface Service {
-    WeeklyReport addReport();
+public interface CounterService {
+    void addWeeklyReport(DailyReport dailyReport);
 
     void deleteReport();
 
     void updateReport();
 
-    WeeklyReport getReportById(int id);
+    WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
 }
