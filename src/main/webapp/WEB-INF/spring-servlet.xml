@@ -22,7 +22,7 @@
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/wages_db"/>
         <property name="username" value="root"/>
-        <property name="password" value="Delux159"/>
+        <property name="password" value="******"/>
     </bean>
 
     <bean id="sessionFactory"
