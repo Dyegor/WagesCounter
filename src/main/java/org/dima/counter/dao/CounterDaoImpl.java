@@ -4,6 +4,7 @@ import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,7 +36,15 @@ public class CounterDaoImpl implements CounterDao {
 
     @Override
     @Transactional
-    public WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate) {
-        return  null;
+    public WeeklyHoursList getWeeklyHoursListByDate(String endingDate) {
+        return null;
+    }
+
+    @Override
+    @Transactional
+    public List<String> getAllWeeklyHoursLists() {
+        Session session = sessionFactory.getCurrentSession();
+        List<String> WeeklyHoursLists = session.createQuery("select distinct weekEndingDate from DailyReport").list();
+        return WeeklyHoursLists;
     }
 }

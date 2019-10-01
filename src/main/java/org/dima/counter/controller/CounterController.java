@@ -26,7 +26,7 @@ public class CounterController {
     public WeeklyHoursList populateWeek() {
         WeeklyHoursList weeklyHoursList = new WeeklyHoursList();
         List<DailyReport> dailyReports = new ArrayList<>();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 6; i++) {
             dailyReports.add(new DailyReport());
         }
         weeklyHoursList.setDailyReportsList(dailyReports);
@@ -51,5 +51,11 @@ public class CounterController {
             counterService.addWeeklyReport(dailyReport);
         }
         return "success";
+    }
+
+    @RequestMapping(value = "/paySlipsList")
+    public String searchForm(Model model) {
+        model.addAttribute("paySlipsList", counterService.getAllWeeklyHoursLists());
+        return "paySlipsList";
     }
 }

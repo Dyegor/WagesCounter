@@ -6,6 +6,8 @@ import org.dima.counter.entity.WeeklyHoursList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CounterServiceImpl implements CounterService {
 
@@ -30,5 +32,10 @@ public class CounterServiceImpl implements CounterService {
     @Override
     public WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate) {
         return counterDao.getWeeklyHoursListByDate(weekEndingDate);
+    }
+
+    @Override
+    public List<String> getAllWeeklyHoursLists() {
+        return counterDao.getAllWeeklyHoursLists();
     }
 }

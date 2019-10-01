@@ -5,5 +5,6 @@
 </head>
 <body>
 <a href="${pageContext.request.contextPath}/counter/addWeek">Add Week Hours</a> <br> <br>
+<a href="${pageContext.request.contextPath}/counter/paySlipsList">List all Employee's Weekly Reports</a> <br> <br>
 </body>
 </html>
