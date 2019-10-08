@@ -14,22 +14,27 @@
     <title>Payslip</title>
 </head>
 <body>
-<c:set var="user" value="${paySlips.dailyReportsList[0].userId}"/>
-<label>User Id: ${user}</label> <br> <br>
-<c:set var="periodEndDate" value="${paySlips.dailyReportsList[0].weekEndingDate}"/>
-<label>Period: ${periodEndDate}</label> <br> <br>
-<table>
-    <tr>
-        <th>Day</th>
-        <th>Normal Hours</th>
-    </tr>
-    <c:forEach items="${paySlips.dailyReportsList}" var="tempPayslip">
+<form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyPayment">
+    <label>User Id: ${paySlips.dailyReportsList[0].userId}</label> <br> <br>
+    <input type="hidden" name="weekEndingDate" value="${paySlips.dailyReportsList[0].weekEndingDate}">
+    <label>Period: ${paySlips.dailyReportsList[0].weekEndingDate}</label> <br> <br>
+    <table>
         <tr>
-            <td>${tempPayslip.day}</td>
-            <td>${tempPayslip.hoursDone}</td>
+            <th>Day</th>
+            <th>Time In</th>
+            <th>Time Out</th>
+            <th>Amount of Hours</th>
         </tr>
-    </c:forEach>
-</table>
-<br> <input type="submit" value="Confirm"/>
+        <c:forEach items="${paySlips.dailyReportsList}" var="tempPayslip">
+            <tr>
+                <td>${tempPayslip.day}</td>
+                <td>${tempPayslip.startTime}</td>
+                <td>${tempPayslip.finishTime}</td>
+                <td>${tempPayslip.hoursDone}</td>
+            </tr>
+        </c:forEach>
+    </table>
+    <br> <input type="submit" value="Confirm"/>
+</form:form>
 </body>
 </html>
