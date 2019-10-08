@@ -2,6 +2,7 @@ package org.dima.counter.dao;
 
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
+import org.dima.counter.entity.WeeklyPayment;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -53,5 +54,12 @@ public class CounterDaoImpl implements CounterDao {
         Session session = sessionFactory.getCurrentSession();
         List<String> WeeklyHoursLists = session.createQuery("select distinct weekEndingDate from DailyReport").list();
         return WeeklyHoursLists;
+    }
+
+    @Override
+    @Transactional
+    public void addWeeklyWages(WeeklyPayment weeklyPayment) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(weeklyPayment);
     }
 }

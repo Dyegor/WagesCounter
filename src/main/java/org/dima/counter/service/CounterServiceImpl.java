@@ -3,6 +3,7 @@ package org.dima.counter.service;
 import org.dima.counter.dao.CounterDao;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
+import org.dima.counter.entity.WeeklyPayment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,10 @@ public class CounterServiceImpl implements CounterService {
     @Override
     public List<String> getAllWeeklyHoursLists() {
         return counterDao.getAllWeeklyHoursLists();
+    }
+
+    @Override
+    public void addWeeklyWages(WeeklyPayment weeklyPayment) {
+        counterDao.addWeeklyWages(weeklyPayment);
     }
 }
