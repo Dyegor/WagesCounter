@@ -70,6 +70,8 @@ public class CounterController {
 
     @RequestMapping(value = "/addingWeeklyPayment")
     public String addingPayments(@RequestParam("weekEndingDate") String weekEndingDate) {
+        double grossEarnings;
+        double paye;
         HoursCounter hoursCounter = new HoursCounter();
         WeeklyPayment weeklyPayment = new WeeklyPayment();
 
@@ -80,6 +82,11 @@ public class CounterController {
         weeklyPayment.setWeekEndingDate(weekEndingDate);
         weeklyPayment.setNormalHours(hoursCounter.getNormalHours());
         weeklyPayment.setOvertimeHours(hoursCounter.getOvertimeHours());
+        grossEarnings = WagesCalculator.calculateGrossEarnings(hoursCounter.getNormalHours(), hoursCounter.getOvertimeHours());
+        paye = WagesCalculator.calculatePaye(grossEarnings);
+        weeklyPayment.setGrossEarnings(grossEarnings);
+        weeklyPayment.setPaye(paye);
+        weeklyPayment.setNetPay(grossEarnings - paye);
 
         counterService.addWeeklyWages(weeklyPayment);
 
