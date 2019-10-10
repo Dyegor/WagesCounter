@@ -15,7 +15,7 @@ public interface CounterDao {
 
     WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
 
-    List<String> getAllWeeklyHoursLists();
+    List<String> getPaySlipsList();
 
     void addWeeklyWages(WeeklyPayment weeklyPayment);
 }

@@ -1,6 +1,7 @@
 package org.dima.counter.controller;
 
-import org.dima.counter.buisnessLogic.wagesCalculator;
+import org.dima.counter.buisnessLogic.HoursCounter;
+import org.dima.counter.buisnessLogic.WagesCalculator;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
 import org.dima.counter.entity.WeeklyPayment;
@@ -47,9 +48,8 @@ public class CounterController {
         for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
             dailyReport.setUserId(userId);
             dailyReport.setWeekEndingDate(weekEndingDate);
-            double amountOfHours = wagesCalculator.calculateHours(dailyReport.getStartTime(),
-                    dailyReport.getFinishTime());
-            dailyReport.setHoursDone(amountOfHours);
+            dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport.getStartTime(),
+                    dailyReport.getFinishTime()));
             counterService.addWeeklyReport(dailyReport);
         }
         return "success";
@@ -57,7 +57,7 @@ public class CounterController {
 
     @RequestMapping(value = "/paySlipsList")
     public String showAllPayslips(Model model) {
-        model.addAttribute("paySlipsList", counterService.getAllWeeklyHoursLists());
+        model.addAttribute("paySlipsList", counterService.getPaySlipsList());
         return "paySlipsList";
     }
 
@@ -70,23 +70,16 @@ public class CounterController {
 
     @RequestMapping(value = "/addingWeeklyPayment")
     public String addingPayments(@RequestParam("weekEndingDate") String weekEndingDate) {
-        double normalHours = 0;
-        double overtimeHours = 0;
-
+        HoursCounter hoursCounter = new HoursCounter();
         WeeklyPayment weeklyPayment = new WeeklyPayment();
 
         for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
-            if (dailyReport.getDay().equals("Saturday")
-                    || dailyReport.getDay().equals("Sunday") || normalHours > 45) {
-                overtimeHours += dailyReport.getHoursDone();
-            } else {
-                normalHours += dailyReport.getHoursDone();
-            }
+            hoursCounter.calculateOvertimeHours(hoursCounter, dailyReport.getHoursDone(), dailyReport.getDay());
         }
 
         weeklyPayment.setWeekEndingDate(weekEndingDate);
-        weeklyPayment.setOvertimeHours(overtimeHours);
-        weeklyPayment.setNormalHours(normalHours);
+        weeklyPayment.setNormalHours(hoursCounter.getNormalHours());
+        weeklyPayment.setOvertimeHours(hoursCounter.getOvertimeHours());
 
         counterService.addWeeklyWages(weeklyPayment);
 

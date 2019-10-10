@@ -36,8 +36,8 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public List<String> getAllWeeklyHoursLists() {
-        return counterDao.getAllWeeklyHoursLists();
+    public List<String> getPaySlipsList() {
+        return counterDao.getPaySlipsList();
     }
 
     @Override
