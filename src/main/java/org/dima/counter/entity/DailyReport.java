@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 
 @Entity
 public class DailyReport {
@@ -12,7 +13,7 @@ public class DailyReport {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int userId;
-    private String weekEndingDate;
+    private Date weekEndingDate;
     private String day;
     private String startTime;
     private String finishTime;
@@ -34,11 +35,11 @@ public class DailyReport {
         this.userId = userId;
     }
 
-    public String getWeekEndingDate() {
+    public Date getWeekEndingDate() {
         return weekEndingDate;
     }
 
-    public void setWeekEndingDate(String weekEndingDate) {
+    public void setWeekEndingDate(Date weekEndingDate) {
         this.weekEndingDate = weekEndingDate;
     }
 

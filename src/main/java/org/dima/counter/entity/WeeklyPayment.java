@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 
 @Entity
 public class WeeklyPayment {
@@ -11,18 +12,27 @@ public class WeeklyPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String weekEndingDate;
+    private int userId;
+    private Date weekEndingDate;
     private double normalHours;
     private double overtimeHours;
     private double grossEarnings;
     private double paye;
     private double netPay;
 
-    public String getWeekEndingDate() {
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Date getWeekEndingDate() {
         return weekEndingDate;
     }
 
-    public void setWeekEndingDate(String weekEndingDate) {
+    public void setWeekEndingDate(Date weekEndingDate) {
         this.weekEndingDate = weekEndingDate;
     }
 

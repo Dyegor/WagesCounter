@@ -14,7 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -44,10 +48,10 @@ public class CounterController {
     @RequestMapping(value = "/addingWeekHours", method = RequestMethod.POST)
     public String addingWeek(@ModelAttribute("weeklyHoursList") WeeklyHoursList weeklyHoursList,
                              @RequestParam("userId") int userId,
-                             @RequestParam("weekEndingDate") String weekEndingDate) {
+                             @RequestParam("weekEndingDate") String weekEndingDate) throws ParseException {
         for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
             dailyReport.setUserId(userId);
-            dailyReport.setWeekEndingDate(weekEndingDate);
+            dailyReport.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
             dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport.getStartTime(),
                     dailyReport.getFinishTime()));
             counterService.addWeeklyReport(dailyReport);
@@ -62,14 +66,15 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/showPaySlip")
-    public String showPayslip(@RequestParam("weekEndingDate") String date, Model model) {
+    public String showPayslip(@RequestParam("weekEndingDate") Date date, Model model) {
         weeklyHoursList = counterService.getWeeklyHoursListByDate(date);
         model.addAttribute("paySlips", weeklyHoursList);
         return "weeklyPaySlip";
     }
 
     @RequestMapping(value = "/addingWeeklyPayment")
-    public String addingPayments(@RequestParam("weekEndingDate") String weekEndingDate) {
+    public String addingPayments(@RequestParam("userId") String userId,
+                                 @RequestParam("weekEndingDate") String weekEndingDate) throws ParseException {
         double grossEarnings;
         double paye;
         HoursCounter hoursCounter = new HoursCounter();
@@ -79,17 +84,18 @@ public class CounterController {
             hoursCounter.calculateOvertimeHours(hoursCounter, dailyReport.getHoursDone(), dailyReport.getDay());
         }
 
-        weeklyPayment.setWeekEndingDate(weekEndingDate);
-        weeklyPayment.setNormalHours(hoursCounter.getNormalHours());
-        weeklyPayment.setOvertimeHours(hoursCounter.getOvertimeHours());
         grossEarnings = WagesCalculator.calculateGrossEarnings(hoursCounter.getNormalHours(), hoursCounter.getOvertimeHours());
         paye = WagesCalculator.calculatePaye(grossEarnings);
+
+        weeklyPayment.setUserId(Integer.parseInt(userId));
+        weeklyPayment.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
+        weeklyPayment.setNormalHours(hoursCounter.getNormalHours());
+        weeklyPayment.setOvertimeHours(hoursCounter.getOvertimeHours());
         weeklyPayment.setGrossEarnings(grossEarnings);
         weeklyPayment.setPaye(paye);
         weeklyPayment.setNetPay(grossEarnings - paye);
 
         counterService.addWeeklyWages(weeklyPayment);
-
         return "success";
     }
 }

@@ -16,6 +16,7 @@
 <body>
 <form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyPayment">
     <label>User Id: ${paySlips.dailyReportsList[0].userId}</label> <br> <br>
+    <input type="hidden" name="userId" value="${paySlips.dailyReportsList[0].userId}">
     <input type="hidden" name="weekEndingDate" value="${paySlips.dailyReportsList[0].weekEndingDate}">
     <label>Period: ${paySlips.dailyReportsList[0].weekEndingDate}</label> <br> <br>
     <table>

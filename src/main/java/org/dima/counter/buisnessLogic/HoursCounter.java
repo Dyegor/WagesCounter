@@ -1,5 +1,8 @@
 package org.dima.counter.buisnessLogic;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 
 public class HoursCounter {
@@ -27,6 +30,13 @@ public class HoursCounter {
             hoursCounter.setNormalHours(hoursCounter.getNormalHours() + hoursDone);
         }
         return hoursCounter;
+    }
+
+    public static Date parseDate(String inputDate) throws ParseException {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = sdf1.parse(inputDate);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return sqlDate;
     }
 
     public double getNormalHours() {
