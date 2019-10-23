@@ -98,4 +98,9 @@ public class CounterController {
         counterService.addWeeklyWages(weeklyPayment);
         return "success";
     }
+
+    @RequestMapping(value = "/showYearlyReport")
+    public String showYearlyReport(Model model) {
+        return "yearlyReport";
+    }
 }

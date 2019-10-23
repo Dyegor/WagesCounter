@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -37,7 +38,7 @@ public class CounterDaoImpl implements CounterDao {
 
     @Override
     @Transactional
-    public WeeklyHoursList getWeeklyHoursListByDate(String endingDate) {
+    public WeeklyHoursList getWeeklyHoursListByDate(Date endingDate) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from DailyReport dr where dr.weekEndingDate = :endingDate"
                 , DailyReport.class);
@@ -50,9 +51,9 @@ public class CounterDaoImpl implements CounterDao {
 
     @Override
     @Transactional
-    public List<String> getPaySlipsList() {
+    public List<Date> getPaySlipsList() {
         Session session = sessionFactory.getCurrentSession();
-        List<String> PaySlipsList = session.createQuery("select distinct weekEndingDate from DailyReport").list();
+        List<Date> PaySlipsList = session.createQuery("select distinct weekEndingDate from DailyReport").list();
         return PaySlipsList;
     }
 
@@ -61,5 +62,17 @@ public class CounterDaoImpl implements CounterDao {
     public void addWeeklyWages(WeeklyPayment weeklyPayment) {
         Session session = sessionFactory.getCurrentSession();
         session.save(weeklyPayment);
+    }
+
+    @Override
+    @Transactional
+    public double getYearlyGrossEarnings(int userId, Date currentDate) {
+        return 0;
+    }
+
+    @Override
+    @Transactional
+    public double getYearlyPaye(int userId, Date currentDate) {
+        return 0;
     }
 }

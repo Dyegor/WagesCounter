@@ -7,6 +7,7 @@ import org.dima.counter.entity.WeeklyPayment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -31,17 +32,27 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate) {
+    public WeeklyHoursList getWeeklyHoursListByDate(Date weekEndingDate) {
         return counterDao.getWeeklyHoursListByDate(weekEndingDate);
     }
 
     @Override
-    public List<String> getPaySlipsList() {
+    public List<Date> getPaySlipsList() {
         return counterDao.getPaySlipsList();
     }
 
     @Override
     public void addWeeklyWages(WeeklyPayment weeklyPayment) {
         counterDao.addWeeklyWages(weeklyPayment);
+    }
+
+    @Override
+    public double getYearlyGrossEarnings(int userId, Date currentDate) {
+        return counterDao.getYearlyGrossEarnings(userId, currentDate);
+    }
+
+    @Override
+    public double getYearlyPaye(int userId, Date currentDate) {
+        return counterDao.getYearlyPaye(userId, currentDate);
     }
 }
