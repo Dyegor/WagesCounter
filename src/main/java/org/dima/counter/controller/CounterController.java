@@ -101,6 +101,12 @@ public class CounterController {
 
     @RequestMapping(value = "/showYearlyReport")
     public String showYearlyReport(Model model) {
+        int userId = 3;
+        java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+        model.addAttribute("yearlyGrossEarnings", counterService.getYearlyGrossEarnings(userId, sqlDate));
+        model.addAttribute("yearlyPaye", counterService.getYearlyPaye(userId, sqlDate));
+        model.addAttribute("correctPaye", WagesCalculator.calculatePaye(counterService.getYearlyPaye(userId, sqlDate)));
         return "yearlyReport";
     }
 }

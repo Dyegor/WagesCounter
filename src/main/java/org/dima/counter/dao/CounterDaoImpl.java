@@ -67,12 +67,24 @@ public class CounterDaoImpl implements CounterDao {
     @Override
     @Transactional
     public double getYearlyGrossEarnings(int userId, Date currentDate) {
-        return 0;
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select sum (grossEarnings) from WeeklyPayment wp where wp.userId = :userId " +
+                "and wp.weekEndingDate between 2019-04-01 and :currentDate");
+        query.setParameter("userId", userId);
+        query.setParameter("currentDate", currentDate);
+        double result = (double) query.uniqueResult();
+        return result;
     }
 
     @Override
     @Transactional
     public double getYearlyPaye(int userId, Date currentDate) {
-        return 0;
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select sum (paye) from WeeklyPayment wp where wp.userId = :userId " +
+                "and wp.weekEndingDate between 2019-04-01 and :currentDate");
+        query.setParameter("userId", userId);
+        query.setParameter("currentDate", currentDate);
+        double result = (double) query.uniqueResult();
+        return result;
     }
 }
