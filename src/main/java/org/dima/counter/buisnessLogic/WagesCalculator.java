@@ -2,22 +2,24 @@ package org.dima.counter.buisnessLogic;
 
 public class WagesCalculator {
     public static double calculateGrossEarnings(double normalHours, double overtimeHours) {
-        return normalHours * 24 + overtimeHours * 24 * 1.5;
+        return normalHours * 22.5 + overtimeHours * 22.5 * 1.5;
     }
 
     public static double calculatePaye(double grossEarnings) {
         double yearlyIncome = grossEarnings * 52;
-        double paye = yearlyIncome * 0.105 / 52;
-
-        if (yearlyIncome > 13999) {
-            paye += (yearlyIncome - 13999) * 0.175 / 52;
-        }
-        if (yearlyIncome > 47999) {
-            paye += (yearlyIncome - 47999) * 0.3 / 52;
-        }
+        double lowIncomePaye = 13999 * 0.105;
+        double mediumIncomePaye = 34000 * 0.175;
+        double highIncomePaye = 22000 * 0.3;
+        double totalPaye = 0;
+        
         if (yearlyIncome > 69999) {
-            paye += (yearlyIncome - 69999) * 0.33 / 52;
-        }
-        return paye;
+            totalPaye = ((yearlyIncome - 70000) * 0.33 + lowIncomePaye + mediumIncomePaye + highIncomePaye) / 52;
+        } else if (yearlyIncome > 47999) {
+            totalPaye = ((yearlyIncome - 48000) * 0.30 + lowIncomePaye + mediumIncomePaye) / 52;
+        } else if (yearlyIncome > 13999) {
+            totalPaye = ((yearlyIncome - 14000) * 0.175 + lowIncomePaye) / 52;
+        }        
+        
+        return totalPaye;
     }
 }
