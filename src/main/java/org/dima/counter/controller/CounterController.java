@@ -93,6 +93,7 @@ public class CounterController {
         weeklyPayment.setOvertimeHours(hoursCounter.getOvertimeHours());
         weeklyPayment.setGrossEarnings(grossEarnings);
         weeklyPayment.setPaye(paye);
+        weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(grossEarnings));
         weeklyPayment.setNetPay(grossEarnings - paye);
 
         counterService.addWeeklyWages(weeklyPayment);

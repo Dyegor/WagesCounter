@@ -18,6 +18,7 @@ public class WeeklyPayment {
     private double overtimeHours;
     private double grossEarnings;
     private double paye;
+    private double accAmount;
     private double netPay;
 
     public int getUserId() {
@@ -66,6 +67,14 @@ public class WeeklyPayment {
 
     public void setPaye(double paye) {
         this.paye = paye;
+    }
+
+    public double getAccAmount() {
+        return accAmount;
+    }
+
+    public void setAccAmount(double accAmount) {
+        this.accAmount = accAmount;
     }
 
     public double getNetPay() {

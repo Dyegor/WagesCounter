@@ -22,4 +22,8 @@ public class WagesCalculator {
         
         return totalPaye;
     }
+
+    public static double calculateAcc(double grossEarnings) {
+        return grossEarnings * 0.0139;
+    }
 }

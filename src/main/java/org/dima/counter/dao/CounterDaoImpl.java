@@ -72,8 +72,7 @@ public class CounterDaoImpl implements CounterDao {
                 "and wp.weekEndingDate between 2019-04-01 and :currentDate");
         query.setParameter("userId", userId);
         query.setParameter("currentDate", currentDate);
-        double result = (double) query.uniqueResult();
-        return result;
+        return (double) query.uniqueResult();
     }
 
     @Override
@@ -84,7 +83,6 @@ public class CounterDaoImpl implements CounterDao {
                 "and wp.weekEndingDate between 2019-04-01 and :currentDate");
         query.setParameter("userId", userId);
         query.setParameter("currentDate", currentDate);
-        double result = (double) query.uniqueResult();
-        return result;
+        return (double) query.uniqueResult();
     }
 }
