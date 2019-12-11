@@ -6,20 +6,20 @@ public class WagesCalculator {
     }
 
     public static double calculatePaye(double grossEarnings) {
-        double yearlyIncome = grossEarnings * 52;
-        double lowIncomePaye = 13999 * 0.105;
-        double mediumIncomePaye = 34000 * 0.175;
-        double highIncomePaye = 22000 * 0.3;
+        final double yearlyIncome = grossEarnings * 52;
+        final double lowIncomePaye = 13999;
+        final double mediumIncomePaye = 34000;
+        final double highIncomePaye = 22000;
         double totalPaye = 0;
         
         if (yearlyIncome > 69999) {
-            totalPaye = ((yearlyIncome - 70000) * 0.33 + lowIncomePaye + mediumIncomePaye + highIncomePaye) / 52;
+            totalPaye = ((grossEarnings - 70000) * 0.33 + lowIncomePaye * 0.105 + mediumIncomePaye * 0.175
+                    + highIncomePaye * 0.3) / 52;
         } else if (yearlyIncome > 47999) {
-            totalPaye = ((yearlyIncome - 48000) * 0.30 + lowIncomePaye + mediumIncomePaye) / 52;
+            totalPaye = ((yearlyIncome - 48000) * 0.30 + lowIncomePaye * 0.105 + mediumIncomePaye * 0.175) / 52;
         } else if (yearlyIncome > 13999) {
-            totalPaye = ((yearlyIncome - 14000) * 0.175 + lowIncomePaye) / 52;
-        }        
-        
+            totalPaye = ((yearlyIncome - 14000) * 0.175 + lowIncomePaye * 0.105) / 52;
+        }
         return totalPaye;
     }
 
