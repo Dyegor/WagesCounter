@@ -14,8 +14,6 @@
 </head>
 <body>
 <form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeekHours" modelAttribute="weeklyHoursList">
-    <label>User Id: </label>
-    <input  type="number" name="userId"/>
     <label>Week Ending: </label>
     <input type="date" name="weekEndingDate"/>
     <table>

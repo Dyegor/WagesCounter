@@ -22,16 +22,6 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public void deleteReport() {
-
-    }
-
-    @Override
-    public void updateReport() {
-
-    }
-
-    @Override
     public WeeklyHoursList getWeeklyHoursListByDate(Date weekEndingDate) {
         return counterDao.getWeeklyHoursListByDate(weekEndingDate);
     }

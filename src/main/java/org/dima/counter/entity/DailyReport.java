@@ -12,7 +12,6 @@ public class DailyReport {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int userId;
     private Date weekEndingDate;
     private String day;
     private String startTime;
@@ -25,14 +24,6 @@ public class DailyReport {
 
     public void setId(int id) {
         id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public Date getWeekEndingDate() {

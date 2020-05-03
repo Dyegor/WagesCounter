@@ -6,6 +6,16 @@ import java.util.List;
 public class WeeklyHoursList {
     private List<DailyReport> dailyReportsList;
 
+    private double totalHours;
+
+    public double getTotalHours() {
+        return totalHours;
+    }
+
+    public void setTotalHours(double totalHours) {
+        this.totalHours = totalHours;
+    }
+
     public List<DailyReport> getDailyReportsList() {
         return dailyReportsList;
     }

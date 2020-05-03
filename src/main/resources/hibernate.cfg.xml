@@ -9,7 +9,7 @@
         <property name="connection.pool_size">1</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">false</property>

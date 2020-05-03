@@ -10,10 +10,6 @@ import java.util.List;
 public interface CounterService {
     void addWeeklyReport(DailyReport dailyReport);
 
-    void deleteReport();
-
-    void updateReport();
-
     WeeklyHoursList getWeeklyHoursListByDate(Date weekEndingDate);
 
     List<Date> getPaySlipsList();

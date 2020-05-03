@@ -47,10 +47,8 @@ public class CounterController {
 
     @RequestMapping(value = "/addingWeekHours", method = RequestMethod.POST)
     public String addingWeek(@ModelAttribute("weeklyHoursList") WeeklyHoursList weeklyHoursList,
-                             @RequestParam("userId") int userId,
                              @RequestParam("weekEndingDate") String weekEndingDate) throws ParseException {
         for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
-            dailyReport.setUserId(userId);
             dailyReport.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
             dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport.getStartTime(),
                     dailyReport.getFinishTime()));
@@ -86,8 +84,6 @@ public class CounterController {
 
         grossEarnings = WagesCalculator.calculateGrossEarnings(hoursCounter.getNormalHours(), hoursCounter.getOvertimeHours());
         paye = WagesCalculator.calculatePaye(grossEarnings);
-
-        weeklyPayment.setUserId(Integer.parseInt(userId));
         weeklyPayment.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
         weeklyPayment.setNormalHours(hoursCounter.getNormalHours());
         weeklyPayment.setOvertimeHours(hoursCounter.getOvertimeHours());
@@ -98,16 +94,5 @@ public class CounterController {
 
         counterService.addWeeklyWages(weeklyPayment);
         return "success";
-    }
-
-    @RequestMapping(value = "/showYearlyReport")
-    public String showYearlyReport(Model model) {
-        int userId = 3;
-        java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-
-        model.addAttribute("yearlyGrossEarnings", counterService.getYearlyGrossEarnings(userId, sqlDate));
-        model.addAttribute("yearlyPaye", counterService.getYearlyPaye(userId, sqlDate));
-        model.addAttribute("correctPaye", WagesCalculator.calculatePaye(counterService.getYearlyPaye(userId, sqlDate)));
-        return "yearlyReport";
     }
 }

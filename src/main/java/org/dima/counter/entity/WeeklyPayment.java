@@ -12,7 +12,7 @@ public class WeeklyPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int userId;
+
     private Date weekEndingDate;
     private double normalHours;
     private double overtimeHours;
@@ -20,14 +20,6 @@ public class WeeklyPayment {
     private double paye;
     private double accAmount;
     private double netPay;
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
     public Date getWeekEndingDate() {
         return weekEndingDate;

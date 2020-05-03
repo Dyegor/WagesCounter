@@ -27,16 +27,6 @@ public class CounterDaoImpl implements CounterDao {
     }
 
     @Override
-    public void deleteReport() {
-
-    }
-
-    @Override
-    public void updateReport() {
-
-    }
-
-    @Override
     @Transactional
     public WeeklyHoursList getWeeklyHoursListByDate(Date endingDate) {
         Session session = sessionFactory.getCurrentSession();
