@@ -19,12 +19,17 @@ public class CounterServiceImpl implements CounterService {
     private CounterDao counterDao;
 
     @Override
-    public void addWeeklyReport(WeeklyHoursList weeklyHoursList, String weekEndingDate) throws ParseException {
-        for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
-            dailyReport.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
-            dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport.getStartTime(),
-                    dailyReport.getFinishTime()));
-            counterDao.addWeeklyReport(dailyReport);
+    public String addWeeklyReport(WeeklyHoursList weeklyHoursList, String weekEndingDate) throws ParseException {
+        if (weeklyHoursList != null && weekEndingDate != null) {
+            for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
+                dailyReport.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
+                dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport.getStartTime(),
+                        dailyReport.getFinishTime()));
+                counterDao.addWeeklyReport(dailyReport);
+            }
+            return "success";
+        } else {
+            return "incorrectInput";
         }
     }
 
