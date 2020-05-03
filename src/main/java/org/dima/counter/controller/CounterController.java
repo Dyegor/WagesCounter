@@ -48,12 +48,7 @@ public class CounterController {
     @RequestMapping(value = "/addingWeekHours", method = RequestMethod.POST)
     public String addingWeek(@ModelAttribute("weeklyHoursList") WeeklyHoursList weeklyHoursList,
                              @RequestParam("weekEndingDate") String weekEndingDate) throws ParseException {
-        for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
-            dailyReport.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
-            dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport.getStartTime(),
-                    dailyReport.getFinishTime()));
-            counterService.addWeeklyReport(dailyReport);
-        }
+        counterService.addWeeklyReport(weeklyHoursList, weekEndingDate);
         return "success";
     }
 

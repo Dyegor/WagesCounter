@@ -1,5 +1,6 @@
 package org.dima.counter.service;
 
+import org.dima.counter.buisnessLogic.HoursCounter;
 import org.dima.counter.dao.CounterDao;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -17,8 +19,13 @@ public class CounterServiceImpl implements CounterService {
     private CounterDao counterDao;
 
     @Override
-    public void addWeeklyReport(DailyReport dailyReport) {
-        counterDao.addWeeklyReport(dailyReport);
+    public void addWeeklyReport(WeeklyHoursList weeklyHoursList, String weekEndingDate) throws ParseException {
+        for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
+            dailyReport.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
+            dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport.getStartTime(),
+                    dailyReport.getFinishTime()));
+            counterDao.addWeeklyReport(dailyReport);
+        }
     }
 
     @Override

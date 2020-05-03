@@ -5,10 +5,11 @@ import org.dima.counter.entity.WeeklyHoursList;
 import org.dima.counter.entity.WeeklyPayment;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 
 public interface CounterService {
-    void addWeeklyReport(DailyReport dailyReport);
+    void addWeeklyReport(WeeklyHoursList weeklyHoursList, String weekEndingDate) throws ParseException;
 
     WeeklyHoursList getWeeklyHoursListByDate(Date weekEndingDate);
 
