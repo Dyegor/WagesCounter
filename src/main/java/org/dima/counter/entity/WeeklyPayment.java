@@ -12,10 +12,8 @@ public class WeeklyPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private Date weekEndingDate;
-    private double normalHours;
-    private double overtimeHours;
+    private double totalHours;
     private double grossEarnings;
     private double paye;
     private double accAmount;
@@ -29,20 +27,12 @@ public class WeeklyPayment {
         this.weekEndingDate = weekEndingDate;
     }
 
-    public double getNormalHours() {
-        return normalHours;
+    public double getTotalHours() {
+        return totalHours;
     }
 
-    public void setNormalHours(double normalHours) {
-        this.normalHours = normalHours;
-    }
-
-    public double getOvertimeHours() {
-        return overtimeHours;
-    }
-
-    public void setOvertimeHours(double overtimeHours) {
-        this.overtimeHours = overtimeHours;
+    public void setTotalHours(double totalHours) {
+        this.totalHours = totalHours;
     }
 
     public double getGrossEarnings() {

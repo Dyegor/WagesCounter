@@ -1,10 +1,7 @@
 package org.dima.counter.controller;
 
-import org.dima.counter.buisnessLogic.HoursCounter;
-import org.dima.counter.buisnessLogic.WagesCalculator;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
-import org.dima.counter.entity.WeeklyPayment;
 import org.dima.counter.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -30,11 +27,6 @@ public class CounterController {
     @ModelAttribute("weeklyHoursList")
     public WeeklyHoursList populateWeek() {
         WeeklyHoursList weeklyHoursList = new WeeklyHoursList();
-        List<DailyReport> dailyReports = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            dailyReports.add(new DailyReport());
-        }
-        weeklyHoursList.setDailyReportsList(dailyReports);
         return weeklyHoursList;
     }
 
@@ -63,28 +55,9 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/addingWeeklyPayment")
-    public String addingPayments(@RequestParam("userId") String userId,
+    public String addingPayments(@ModelAttribute("weeklyHoursList") WeeklyHoursList weeklyHoursList,
                                  @RequestParam("weekEndingDate") String weekEndingDate) throws ParseException {
-        double grossEarnings;
-        double paye;
-        HoursCounter hoursCounter = new HoursCounter();
-        WeeklyPayment weeklyPayment = new WeeklyPayment();
-
-        for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
-            hoursCounter.calculateOvertimeHours(hoursCounter, dailyReport.getHoursDone(), dailyReport.getDay());
-        }
-
-        grossEarnings = WagesCalculator.calculateGrossEarnings(hoursCounter.getNormalHours(), hoursCounter.getOvertimeHours());
-        paye = WagesCalculator.calculatePaye(grossEarnings);
-        weeklyPayment.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
-        weeklyPayment.setNormalHours(hoursCounter.getNormalHours());
-        weeklyPayment.setOvertimeHours(hoursCounter.getOvertimeHours());
-        weeklyPayment.setGrossEarnings(grossEarnings);
-        weeklyPayment.setPaye(paye);
-        weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(grossEarnings));
-        weeklyPayment.setNetPay(grossEarnings - paye);
-
-        counterService.addWeeklyWages(weeklyPayment);
+        counterService.addWeeklyWages(weeklyHoursList, weekEndingDate);
         return "success";
     }
 }

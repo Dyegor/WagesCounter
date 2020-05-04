@@ -1,15 +1,19 @@
 package org.dima.counter.buisnessLogic;
 
+import org.dima.counter.entity.DailyReport;
+
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 
 public class HoursCounter {
-    private double normalHours;
-    private double overtimeHours;
+    private static double totalWeeklyHours;
 
-    public static double calculateAmountOfHours(String startTime, String finishTime) {
+    public static double calculateAmountOfHours(DailyReport dailyReport) {
+        String startTime = dailyReport.getStartTime();
+        String finishTime = dailyReport.getFinishTime();
+
         LocalTime time1 = LocalTime.of(0, 0, 0);
         LocalTime time2 = LocalTime.of(0, 0, 0);
 
@@ -22,14 +26,13 @@ public class HoursCounter {
         return (double) difference / 60;
     }
 
-    public HoursCounter calculateOvertimeHours(HoursCounter hoursCounter, double hoursDone, String weekDay) {
-        if (weekDay.equals("Saturday")
-                || weekDay.equals("Sunday") || hoursCounter.getNormalHours() > 45) {
-            hoursCounter.setOvertimeHours(hoursCounter.getOvertimeHours() + hoursDone);
+    public static double calculateTotalHours(DailyReport dailyReport) {
+        if (dailyReport.getDay().equals("Saturday")
+                || dailyReport.getDay().equals("Sunday") || totalWeeklyHours > 45) {
+            return totalWeeklyHours += dailyReport.getHoursDone() * 1.5;
         } else {
-            hoursCounter.setNormalHours(hoursCounter.getNormalHours() + hoursDone);
+            return totalWeeklyHours += dailyReport.getHoursDone();
         }
-        return hoursCounter;
     }
 
     public static Date parseDate(String inputDate) throws ParseException {
@@ -37,21 +40,5 @@ public class HoursCounter {
         java.util.Date date = sdf1.parse(inputDate);
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         return sqlDate;
-    }
-
-    public double getNormalHours() {
-        return normalHours;
-    }
-
-    public void setNormalHours(double normalHours) {
-        this.normalHours = normalHours;
-    }
-
-    public double getOvertimeHours() {
-        return overtimeHours;
-    }
-
-    public void setOvertimeHours(double overtimeHours) {
-        this.overtimeHours = overtimeHours;
     }
 }

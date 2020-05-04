@@ -1,8 +1,8 @@
 package org.dima.counter.buisnessLogic;
 
 public class WagesCalculator {
-    public static double calculateGrossEarnings(double normalHours, double overtimeHours) {
-        return normalHours * 22.5 + overtimeHours * 22.5 * 1.5;
+    public static double calculateGrossEarnings(double totalHours) {
+        return totalHours * 22.5;
     }
 
     public static double calculatePaye(double grossEarnings) {

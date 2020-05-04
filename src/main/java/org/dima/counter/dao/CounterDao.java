@@ -16,7 +16,7 @@ public interface CounterDao {
 
     void addWeeklyWages(WeeklyPayment weeklyPayment);
 
-    double getYearlyGrossEarnings(int userId, Date currentDate);
+    double getYearlyGrossEarnings(Date currentDate);
 
-    double getYearlyPaye(int userId, Date currentDate);
+    double getYearlyPaye(Date currentDate);
 }
