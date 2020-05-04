@@ -20,10 +20,10 @@ public class CounterServiceImpl implements CounterService {
     private CounterDao counterDao;
 
     @Override
-    public String addWeeklyReport(WeeklyHoursList weeklyHoursList, String weekEndingDate) throws ParseException {
-        if (weeklyHoursList != null && weekEndingDate != null) {
+    public String addWeeklyReport(WeeklyHoursList weeklyHoursList) throws ParseException {
+        if (weeklyHoursList != null && weeklyHoursList.getWeekEndingDate() != null) {
             for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
-                dailyReport.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
+                dailyReport.setWeekEndingDate(HoursCounter.parseDate(weeklyHoursList.getWeekEndingDate()));
                 dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport));
                 counterDao.addWeeklyReport(dailyReport);
             }
@@ -45,13 +45,11 @@ public class CounterServiceImpl implements CounterService {
 
     @Override
     public void addWeeklyWages(WeeklyHoursList weeklyHoursList, String weekEndingDate) throws ParseException {
-        double grossEarnings;
-        double paye;
         WeeklyPayment weeklyPayment = new WeeklyPayment();
 
         weeklyPayment.setTotalHours(weeklyHoursList.getTotalHours());
-        grossEarnings = WagesCalculator.calculateGrossEarnings(weeklyHoursList.getTotalHours());
-        paye = WagesCalculator.calculatePaye(grossEarnings);
+        double grossEarnings = WagesCalculator.calculateGrossEarnings(weeklyHoursList.getTotalHours());
+        double paye = WagesCalculator.calculatePaye(grossEarnings);
         weeklyPayment.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
         weeklyPayment.setGrossEarnings(grossEarnings);
         weeklyPayment.setPaye(paye);

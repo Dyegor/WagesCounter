@@ -1,6 +1,5 @@
 package org.dima.counter.controller;
 
-import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
 import org.dima.counter.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/counter")
@@ -36,9 +33,8 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/addingWeekHours", method = RequestMethod.POST)
-    public String addingWeek(@ModelAttribute("weeklyHoursList") WeeklyHoursList weeklyHoursList,
-                             @RequestParam("weekEndingDate") String weekEndingDate) throws ParseException {
-        return counterService.addWeeklyReport(weeklyHoursList, weekEndingDate);
+    public String addingWeek(@ModelAttribute("weeklyHoursList") WeeklyHoursList weeklyHoursList) throws ParseException {
+        return counterService.addWeeklyReport(weeklyHoursList);
     }
 
     @RequestMapping(value = "/paySlipsList")

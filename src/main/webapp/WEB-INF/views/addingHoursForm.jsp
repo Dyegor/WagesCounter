@@ -15,7 +15,7 @@
 <body>
 <form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeekHours" modelAttribute="weeklyHoursList">
     <label>Week Ending: </label>
-    <input type="date" name="weekEndingDate"/>
+    <form:input type="date" path="weekEndingDate"/>
     <table>
         <tr>
             <th>Day</th>

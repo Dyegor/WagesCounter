@@ -8,6 +8,8 @@ public class WeeklyHoursList {
     private List<DailyReport> dailyReportsList;
     private double totalHours;
 
+    private  String weekEndingDate;
+
     public List<DailyReport> getDailyReportsList() {
         return dailyReportsList;
     }
@@ -22,5 +24,13 @@ public class WeeklyHoursList {
 
     public void setTotalHours(double totalHours) {
         this.totalHours = totalHours;
+    }
+
+    public String getWeekEndingDate() {
+        return weekEndingDate;
+    }
+
+    public void setWeekEndingDate(String weekEndingDate) {
+        this.weekEndingDate = weekEndingDate;
     }
 }
