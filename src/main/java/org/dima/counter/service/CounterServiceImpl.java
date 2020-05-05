@@ -1,7 +1,6 @@
 package org.dima.counter.service;
 
 import org.dima.counter.buisnessLogic.HoursCounter;
-import org.dima.counter.buisnessLogic.WagesCalculator;
 import org.dima.counter.dao.CounterDao;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
@@ -22,11 +21,18 @@ public class CounterServiceImpl implements CounterService {
     @Override
     public String addWeeklyReport(WeeklyHoursList weeklyHoursList) throws ParseException {
         if (weeklyHoursList != null && weeklyHoursList.getWeekEndingDate() != null) {
+            WeeklyPayment weeklyPayment = new WeeklyPayment();
+
             for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
-                dailyReport.setWeekEndingDate(HoursCounter.parseDate(weeklyHoursList.getWeekEndingDate()));
+                dailyReport.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
                 dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport));
+
+                weeklyPayment.calculateTotalHours(dailyReport);
+                weeklyPayment.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
                 counterDao.addWeeklyReport(dailyReport);
             }
+            weeklyPayment.populateWeek(weeklyPayment);
+            counterDao.addWeeklyWages(weeklyPayment);
             return "success";
         } else {
             return "incorrectInput";
@@ -41,22 +47,6 @@ public class CounterServiceImpl implements CounterService {
     @Override
     public List<Date> getPaySlipsList() {
         return counterDao.getPaySlipsList();
-    }
-
-    @Override
-    public void addWeeklyWages(WeeklyHoursList weeklyHoursList, String weekEndingDate) throws ParseException {
-        WeeklyPayment weeklyPayment = new WeeklyPayment();
-
-        weeklyPayment.setTotalHours(weeklyHoursList.getTotalHours());
-        double grossEarnings = WagesCalculator.calculateGrossEarnings(weeklyHoursList.getTotalHours());
-        double paye = WagesCalculator.calculatePaye(grossEarnings);
-        weeklyPayment.setWeekEndingDate(HoursCounter.parseDate(weekEndingDate));
-        weeklyPayment.setGrossEarnings(grossEarnings);
-        weeklyPayment.setPaye(paye);
-        weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(grossEarnings));
-        weeklyPayment.setNetPay(grossEarnings - paye);
-
-        counterDao.addWeeklyWages(weeklyPayment);
     }
 
     @Override

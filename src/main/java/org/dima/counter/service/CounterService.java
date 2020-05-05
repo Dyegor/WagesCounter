@@ -13,8 +13,6 @@ public interface CounterService {
 
     List<Date> getPaySlipsList();
 
-    void addWeeklyWages(WeeklyHoursList weeklyHoursList, String weekEndingDate) throws ParseException;
-
     double getYearlyGrossEarnings(Date currentDate);
 
     double getYearlyPaye(Date currentDate);
