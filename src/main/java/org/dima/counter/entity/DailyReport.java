@@ -12,7 +12,7 @@ public class DailyReport {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Date weekEndingDate;
+    private String weekEndingDate;
     private String day;
     private String startTime;
     private String finishTime;
@@ -26,11 +26,11 @@ public class DailyReport {
         id = id;
     }
 
-    public Date getWeekEndingDate() {
+    public String getWeekEndingDate() {
         return weekEndingDate;
     }
 
-    public void setWeekEndingDate(Date weekEndingDate) {
+    public void setWeekEndingDate(String weekEndingDate) {
         this.weekEndingDate = weekEndingDate;
     }
 

@@ -2,12 +2,9 @@ package org.dima.counter.entity;
 
 import java.util.List;
 
-// Wrapper class for Daily Reports List
 public class WeeklyHoursList {
 
     private List<DailyReport> dailyReportsList;
-    private double totalHours;
-
     private  String weekEndingDate;
 
     public List<DailyReport> getDailyReportsList() {
@@ -16,14 +13,6 @@ public class WeeklyHoursList {
 
     public void setDailyReportsList(List<DailyReport> dailyReportsList) {
         this.dailyReportsList = dailyReportsList;
-    }
-
-    public double getTotalHours() {
-        return totalHours;
-    }
-
-    public void setTotalHours(double totalHours) {
-        this.totalHours = totalHours;
     }
 
     public String getWeekEndingDate() {
