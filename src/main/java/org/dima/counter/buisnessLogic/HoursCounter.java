@@ -2,13 +2,9 @@ package org.dima.counter.buisnessLogic;
 
 import org.dima.counter.entity.DailyReport;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 
 public class HoursCounter {
-    private static double totalWeeklyHours;
 
     public static double calculateAmountOfHours(DailyReport dailyReport) {
         String startTime = dailyReport.getStartTime();
@@ -24,21 +20,5 @@ public class HoursCounter {
 
         long difference = java.time.Duration.between(time1, time2).toMinutes();
         return (double) difference / 60;
-    }
-
-    public static double calculateTotalHours(DailyReport dailyReport) {
-        if (dailyReport.getDay().equals("Saturday")
-                || dailyReport.getDay().equals("Sunday") || totalWeeklyHours > 45) {
-            return totalWeeklyHours += dailyReport.getHoursDone() * 1.5;
-        } else {
-            return totalWeeklyHours += dailyReport.getHoursDone();
-        }
-    }
-
-    public static Date parseDate(String inputDate) throws ParseException {
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date date = sdf1.parse(inputDate);
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        return sqlDate;
     }
 }
