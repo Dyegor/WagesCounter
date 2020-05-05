@@ -49,11 +49,4 @@ public class CounterController {
         model.addAttribute("paySlips", weeklyHoursList);
         return "weeklyPaySlip";
     }
-
-    @RequestMapping(value = "/addingWeeklyPayment")
-    public String addingPayments(@ModelAttribute("weeklyHoursList") WeeklyHoursList weeklyHoursList,
-                                 @RequestParam("weekEndingDate") String weekEndingDate) throws ParseException {
-        counterService.addWeeklyWages(weeklyHoursList, weekEndingDate);
-        return "success";
-    }
 }
