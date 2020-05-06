@@ -16,7 +16,7 @@
 <body>
 <form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyPayment">
     <input type="hidden" name="weekEndingDate" value="${paySlips.dailyReportsList[0].weekEndingDate}">
-    <label>Period: ${paySlips.dailyReportsList[0].weekEndingDate}</label> <br> <br>
+    <label>Week Ending: ${paySlips.dailyReportsList[0].weekEndingDate}</label> <br> <br>
     <table>
         <tr>
             <th>Day</th>
