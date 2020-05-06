@@ -40,13 +40,13 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public WeeklyHoursList getWeeklyHoursListByDate(Date weekEndingDate) {
-        return counterDao.getWeeklyHoursListByDate(weekEndingDate);
+    public List<Date> getPaySlipsList() {
+        return counterDao.getPaySlipsList();
     }
 
     @Override
-    public List<Date> getPaySlipsList() {
-        return counterDao.getPaySlipsList();
+    public WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate) {
+        return counterDao.getWeeklyHoursListByDate(weekEndingDate);
     }
 
     @Override

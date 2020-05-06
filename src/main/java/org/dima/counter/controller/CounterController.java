@@ -44,7 +44,7 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/showPaySlip")
-    public String showPayslip(@RequestParam("weekEndingDate") Date date, Model model) {
+    public String showPayslipByDate(@RequestParam("weekEndingDate") String date, Model model) {
         weeklyHoursList = counterService.getWeeklyHoursListByDate(date);
         model.addAttribute("paySlips", weeklyHoursList);
         return "weeklyPaySlip";

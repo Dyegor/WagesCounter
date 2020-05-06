@@ -9,7 +9,7 @@ import java.util.List;
 public interface CounterService {
     String addWeeklyReport(WeeklyHoursList weeklyHoursList) throws ParseException;
 
-    WeeklyHoursList getWeeklyHoursListByDate(Date weekEndingDate);
+    WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
 
     List<Date> getPaySlipsList();
 

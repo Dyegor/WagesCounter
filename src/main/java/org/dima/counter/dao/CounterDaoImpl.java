@@ -28,15 +28,9 @@ public class CounterDaoImpl implements CounterDao {
 
     @Override
     @Transactional
-    public WeeklyHoursList getWeeklyHoursListByDate(Date endingDate) {
+    public void addWeeklyWages(WeeklyPayment weeklyPayment) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from DailyReport dr where dr.weekEndingDate = :endingDate"
-                , DailyReport.class);
-        query.setParameter("endingDate", endingDate);
-        List<DailyReport> dailyReports = query.list();
-        WeeklyHoursList weeklyHoursList = new WeeklyHoursList();
-        weeklyHoursList.setDailyReportsList(dailyReports);
-        return weeklyHoursList;
+        session.save(weeklyPayment);
     }
 
     @Override
@@ -49,9 +43,15 @@ public class CounterDaoImpl implements CounterDao {
 
     @Override
     @Transactional
-    public void addWeeklyWages(WeeklyPayment weeklyPayment) {
+    public WeeklyHoursList getWeeklyHoursListByDate(String endingDate) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(weeklyPayment);
+        Query query = session.createQuery("from DailyReport dr where dr.weekEndingDate = :endingDate"
+                , DailyReport.class);
+        query.setParameter("endingDate", endingDate);
+        List<DailyReport> dailyReports = query.list();
+        WeeklyHoursList weeklyHoursList = new WeeklyHoursList();
+        weeklyHoursList.setDailyReportsList(dailyReports);
+        return weeklyHoursList;
     }
 
     @Override
