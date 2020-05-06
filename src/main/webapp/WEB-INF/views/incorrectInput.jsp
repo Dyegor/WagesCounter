@@ -11,6 +11,9 @@
     <title>Incorrect Input</title>
 </head>
 <body>
-    All form fields must be filled before submitting!
+<h3>All form fields must be filled before submitting!</h3>
+<form:form action="${pageContext.request.contextPath}/counter/addWeek">
+    <button>Create a new Timesheet</button>
+</form:form>
 </body>
 </html>
