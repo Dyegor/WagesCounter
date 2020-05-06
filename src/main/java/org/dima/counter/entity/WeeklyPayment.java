@@ -82,8 +82,8 @@ public class WeeklyPayment {
     }
 
     public WeeklyPayment populateWeek(WeeklyPayment weeklyPayment) {
-        double grossEarnings = WagesCalculator.calculateGrossEarnings(weeklyPayment.getTotalHours());
-        double paye = WagesCalculator.calculatePaye(grossEarnings);
+        grossEarnings = WagesCalculator.calculateGrossEarnings(weeklyPayment.getTotalHours());
+        paye = WagesCalculator.calculatePaye(grossEarnings);
 
         weeklyPayment.setGrossEarnings(grossEarnings);
         weeklyPayment.setPaye(paye);

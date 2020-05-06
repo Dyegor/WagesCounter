@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Date;
 import java.text.ParseException;
 
 @Controller
@@ -48,5 +47,11 @@ public class CounterController {
         weeklyHoursList = counterService.getWeeklyHoursListByDate(date);
         model.addAttribute("paySlips", weeklyHoursList);
         return "weeklyPaySlip";
+    }
+
+    @RequestMapping(value = "/yearlyReport")
+    public String getYearlyReport(Model model) {
+        model.addAttribute("paymentSummary", counterService.getYearlyPayments());
+        return "yearlyReport";
     }
 }

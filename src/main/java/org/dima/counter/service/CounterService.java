@@ -1,6 +1,7 @@
 package org.dima.counter.service;
 
 import org.dima.counter.entity.WeeklyHoursList;
+import org.dima.counter.entity.WeeklyPayment;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -13,7 +14,5 @@ public interface CounterService {
 
     List<Date> getPaySlipsList();
 
-    double getYearlyGrossEarnings(Date currentDate);
-
-    double getYearlyPaye(Date currentDate);
+    WeeklyPayment getYearlyPayments();
 }

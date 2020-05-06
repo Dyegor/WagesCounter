@@ -10,13 +10,11 @@ import java.util.List;
 public interface CounterDao {
     void addWeeklyReport(DailyReport dailyReport);
 
-    WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
+    void addWeeklyWages(WeeklyPayment weeklyPayment);
 
     List<Date> getPaySlipsList();
 
-    void addWeeklyWages(WeeklyPayment weeklyPayment);
+    WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
 
-    double getYearlyGrossEarnings(Date currentDate);
-
-    double getYearlyPaye(Date currentDate);
+    List<WeeklyPayment> getWeeklyPaymentsList();
 }

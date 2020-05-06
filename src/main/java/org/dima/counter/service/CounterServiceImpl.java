@@ -50,12 +50,17 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public double getYearlyGrossEarnings(Date currentDate) {
-        return counterDao.getYearlyGrossEarnings(currentDate);
-    }
+    public WeeklyPayment getYearlyPayments() {
+        WeeklyPayment paymentSummary = new WeeklyPayment();
+        List<WeeklyPayment> allWeeklyPayments = counterDao.getWeeklyPaymentsList();
 
-    @Override
-    public double getYearlyPaye(Date currentDate) {
-        return counterDao.getYearlyPaye(currentDate);
+        for (WeeklyPayment weeklyPayment : allWeeklyPayments) {
+            paymentSummary.setTotalHours(paymentSummary.getTotalHours() + weeklyPayment.getTotalHours());
+            paymentSummary.setAccAmount(paymentSummary.getAccAmount() + weeklyPayment.getAccAmount());
+            paymentSummary.setGrossEarnings(paymentSummary.getGrossEarnings() + weeklyPayment.getGrossEarnings());
+            paymentSummary.setNetPay(paymentSummary.getNetPay() + weeklyPayment.getNetPay());
+            paymentSummary.setPaye(paymentSummary.getPaye() + weeklyPayment.getPaye());
+        }
+        return paymentSummary;
     }
 }
