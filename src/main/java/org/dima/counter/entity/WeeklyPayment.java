@@ -1,10 +1,11 @@
 package org.dima.counter.entity;
 
+import org.dima.counter.buisnessLogic.WagesCalculator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.sql.Date;
 
 @Entity
 public class WeeklyPayment {
@@ -12,18 +13,18 @@ public class WeeklyPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Date weekEndingDate;
+    private String weekEndingDate;
     private double totalHours;
     private double grossEarnings;
     private double paye;
     private double accAmount;
     private double netPay;
 
-    public Date getWeekEndingDate() {
+    public String getWeekEndingDate() {
         return weekEndingDate;
     }
 
-    public void setWeekEndingDate(Date weekEndingDate) {
+    public void setWeekEndingDate(String weekEndingDate) {
         this.weekEndingDate = weekEndingDate;
     }
 
@@ -65,5 +66,29 @@ public class WeeklyPayment {
 
     public void setNetPay(double netPay) {
         this.netPay = netPay;
+    }
+
+    public double calculateTotalHours(DailyReport dailyReport) {
+        double dailyHours = dailyReport.getHoursDone();
+        if (dailyReport.getDay().equals("Saturday") || dailyReport.getDay().equals("Sunday")
+                || totalHours > 45) {
+            totalHours += dailyHours * 1.5;
+        } else if ((totalHours + dailyHours) > 45) {
+            totalHours = 45 + (totalHours + dailyHours - 45) * 1.5;
+        } else {
+            totalHours += dailyHours;
+        }
+        return totalHours;
+    }
+
+    public WeeklyPayment populateWeek(WeeklyPayment weeklyPayment) {
+        double grossEarnings = WagesCalculator.calculateGrossEarnings(weeklyPayment.getTotalHours());
+        double paye = WagesCalculator.calculatePaye(grossEarnings);
+
+        weeklyPayment.setGrossEarnings(grossEarnings);
+        weeklyPayment.setPaye(paye);
+        weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(grossEarnings));
+        weeklyPayment.setNetPay(grossEarnings - paye);
+        return weeklyPayment;
     }
 }

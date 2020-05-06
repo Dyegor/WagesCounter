@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.text.ParseException;
 import java.util.List;
 
 @Service
@@ -19,7 +18,7 @@ public class CounterServiceImpl implements CounterService {
     private CounterDao counterDao;
 
     @Override
-    public String addWeeklyReport(WeeklyHoursList weeklyHoursList) throws ParseException {
+    public String addWeeklyReport(WeeklyHoursList weeklyHoursList) {
         if (weeklyHoursList != null && weeklyHoursList.getWeekEndingDate() != null) {
             WeeklyPayment weeklyPayment = new WeeklyPayment();
 
@@ -31,6 +30,7 @@ public class CounterServiceImpl implements CounterService {
                 weeklyPayment.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
                 counterDao.addWeeklyReport(dailyReport);
             }
+
             weeklyPayment.populateWeek(weeklyPayment);
             counterDao.addWeeklyWages(weeklyPayment);
             return "success";
