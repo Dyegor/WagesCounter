@@ -1,6 +1,7 @@
 package org.dima.counter.buisnessLogic;
 
 public class WagesCalculator {
+
     public static double calculateGrossEarnings(double totalHours) {
         return totalHours * 22.5;
     }

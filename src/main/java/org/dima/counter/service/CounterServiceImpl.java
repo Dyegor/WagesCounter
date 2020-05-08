@@ -4,7 +4,8 @@ import org.dima.counter.buisnessLogic.HoursCounter;
 import org.dima.counter.dao.CounterDao;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
-import org.dima.counter.entity.WeeklyPayment;
+import org.dima.counter.entity.payments.WeeklyPayment;
+import org.dima.counter.entity.payments.YearlyPayment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +22,14 @@ public class CounterServiceImpl implements CounterService {
     public String addWeeklyReport(WeeklyHoursList weeklyHoursList) {
         if (weeklyHoursList != null && weeklyHoursList.getWeekEndingDate() != null) {
             WeeklyPayment weeklyPayment = new WeeklyPayment();
-
             for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
                 dailyReport.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
                 dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport));
-
-                weeklyPayment.calculateTotalHours(dailyReport);
-                weeklyPayment.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
+                weeklyPayment.setTotalHours(weeklyPayment.calculateTotalHours(dailyReport, weeklyPayment));
                 counterDao.addWeeklyReport(dailyReport);
             }
 
+            weeklyPayment.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
             weeklyPayment.populateWeek(weeklyPayment);
             counterDao.addWeeklyWages(weeklyPayment);
             return "success";
@@ -50,17 +49,10 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public WeeklyPayment getYearlyPayments() {
-        WeeklyPayment paymentSummary = new WeeklyPayment();
+    public YearlyPayment getYearlyPayments() {
         List<WeeklyPayment> allWeeklyPayments = counterDao.getWeeklyPaymentsList();
-
-        for (WeeklyPayment weeklyPayment : allWeeklyPayments) {
-            paymentSummary.setTotalHours(paymentSummary.getTotalHours() + weeklyPayment.getTotalHours());
-            paymentSummary.setAccAmount(paymentSummary.getAccAmount() + weeklyPayment.getAccAmount());
-            paymentSummary.setGrossEarnings(paymentSummary.getGrossEarnings() + weeklyPayment.getGrossEarnings());
-            paymentSummary.setNetPay(paymentSummary.getNetPay() + weeklyPayment.getNetPay());
-            paymentSummary.setPaye(paymentSummary.getPaye() + weeklyPayment.getPaye());
-        }
+        YearlyPayment paymentSummary = new YearlyPayment();
+        paymentSummary.populateYearlyPayment(paymentSummary, allWeeklyPayments);
         return paymentSummary;
     }
 }
