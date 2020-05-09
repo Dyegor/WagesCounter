@@ -13,7 +13,7 @@
     <title>TimeSheet</title>
 </head>
 <body>
-<form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeekHours" modelAttribute="weeklyHoursList">
+<form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeekHours">
     <label>Week Ending: </label>
     <form:input type="date" path="weekEndingDate"/>
     <table>

@@ -16,6 +16,7 @@
 <body>
 <form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyPayment">
     <input type="hidden" name="weekEndingDate" value="${paySlips.dailyReportsList[0].weekEndingDate}">
+    <input type="hidden" name="totalHours" value="${paySlips.totalHours}">
     <label>Week Ending: ${paySlips.dailyReportsList[0].weekEndingDate}</label> <br> <br>
     <table>
         <tr>
@@ -33,7 +34,7 @@
             </tr>
         </c:forEach>
     </table>
-    <br> <input type="submit" value="Confirm"/>
+    <br> <input type="submit" value="Calculate weekly Payments"/>
 </form:form>
 </body>
 </html>
