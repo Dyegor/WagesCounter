@@ -23,19 +23,4 @@ public class WeeklyPayment extends Payment {
         weeklyPayment.setNetPay(weeklyPayment.getGrossEarnings() - weeklyPayment.getPaye());
         return weeklyPayment;
     }
-
-    public double calculateTotalHours(DailyReport dailyReport, WeeklyHoursList weeklyHoursList) {
-        double dailyHours = dailyReport.getHoursDone();
-        double totalHours = weeklyHoursList.getTotalHours();
-
-        if (dailyReport.getDay().equals("Saturday") || dailyReport.getDay().equals("Sunday")
-                || totalHours > 45) {
-            totalHours += dailyHours * 1.5;
-        } else if ((totalHours + dailyHours) > 45) {
-            totalHours = 45 + (totalHours + dailyHours - 45) * 1.5;
-        } else {
-            totalHours += dailyHours;
-        }
-        return totalHours;
-    }
 }
