@@ -21,21 +21,23 @@ public class CounterServiceImpl implements CounterService {
     @Override
     public String addWeeklyReport(WeeklyHoursList weeklyHoursList) {
         if (weeklyHoursList != null && weeklyHoursList.getWeekEndingDate() != null) {
-            WeeklyPayment weeklyPayment = new WeeklyPayment();
             for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
                 dailyReport.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
                 dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport));
-                weeklyPayment.setTotalHours(weeklyPayment.calculateTotalHours(dailyReport, weeklyPayment));
                 counterDao.addWeeklyReport(dailyReport);
             }
-
-            weeklyPayment.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
-            weeklyPayment.populateWeek(weeklyPayment);
-            counterDao.addWeeklyWages(weeklyPayment);
             return "success";
         } else {
             return "incorrectInput";
         }
+    }
+
+    @Override
+    public String addWeeklyPayment(WeeklyPayment weeklyPayment, WeeklyHoursList weeklyHoursList) {
+        weeklyPayment.setTotalHours(weeklyHoursList.getTotalHours());
+        weeklyPayment.populateWeek(weeklyPayment);
+        counterDao.addWeeklyWages(weeklyPayment);
+        return "success";
     }
 
     @Override
@@ -45,7 +47,11 @@ public class CounterServiceImpl implements CounterService {
 
     @Override
     public WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate) {
-        return counterDao.getWeeklyHoursListByDate(weekEndingDate);
+        WeeklyHoursList weeklyHoursList = counterDao.getWeeklyHoursListByDate(weekEndingDate);
+        for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
+            weeklyHoursList.setTotalHours(weeklyHoursList.calculateTotalHours(dailyReport, weeklyHoursList));
+        }
+        return weeklyHoursList;
     }
 
     @Override
