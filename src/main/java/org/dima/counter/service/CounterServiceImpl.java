@@ -41,7 +41,7 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public List<Date> getPaySlipsList() {
+    public List<String> getPaySlipsList() {
         return counterDao.getPaySlipsList();
     }
 

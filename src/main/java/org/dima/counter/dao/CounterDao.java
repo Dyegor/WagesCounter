@@ -4,7 +4,6 @@ import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
 import org.dima.counter.entity.payments.WeeklyPayment;
 
-import java.sql.Date;
 import java.util.List;
 
 public interface CounterDao {
@@ -12,7 +11,7 @@ public interface CounterDao {
 
     void addWeeklyWages(WeeklyPayment weeklyPayment);
 
-    List<Date> getPaySlipsList();
+    List<String> getPaySlipsList();
 
     WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
 

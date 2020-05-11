@@ -14,7 +14,7 @@ public interface CounterService {
 
     WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
 
-    List<Date> getPaySlipsList();
+    List<String> getPaySlipsList();
 
     YearlyPayment getYearlyPayments();
 }
