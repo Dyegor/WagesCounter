@@ -14,8 +14,7 @@
     <title>Payslip</title>
 </head>
 <body>
-<form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyPayment">
-    <input type="hidden" name="weekEndingDate" value="${paySlips.dailyReportsList[0].weekEndingDate}">
+<form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyPayment/${param.weekEndingDate}">
     <input type="hidden" name="totalHours" value="${paySlips.totalHours}">
     <label>Week Ending: ${paySlips.dailyReportsList[0].weekEndingDate}</label> <br> <br>
     <table>
@@ -35,6 +34,9 @@
         </c:forEach>
     </table>
     <br> <input type="submit" value="Calculate weekly Payments"/>
+</form:form>
+<form:form action="${pageContext.request.contextPath}/counter/deleteWeeklyReport/${param.weekEndingDate}">
+    <input type="submit" value="Delete Timesheet"/>
 </form:form>
 </body>
 </html>
