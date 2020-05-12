@@ -1,7 +1,5 @@
 package org.dima.counter.entity;
 
-import org.dima.counter.entity.payments.WeeklyPayment;
-
 import java.util.List;
 
 public class WeeklyHoursList {

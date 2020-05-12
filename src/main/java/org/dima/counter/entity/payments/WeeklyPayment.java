@@ -1,8 +1,6 @@
 package org.dima.counter.entity.payments;
 
 import org.dima.counter.buisnessLogic.WagesCalculator;
-import org.dima.counter.entity.DailyReport;
-import org.dima.counter.entity.WeeklyHoursList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

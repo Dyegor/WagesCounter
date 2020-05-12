@@ -14,18 +14,15 @@ public class CounterController {
 
     @Autowired
     private CounterService counterService;
-    private WeeklyHoursList weeklyHoursList;
 
     @ModelAttribute("weeklyHoursList")
     public WeeklyHoursList populateWeek() {
-        WeeklyHoursList weeklyHoursList = new WeeklyHoursList();
-        return weeklyHoursList;
+        return new WeeklyHoursList();
     }
 
     @ModelAttribute("weeklyPayment")
     public WeeklyPayment populateWeeklyPayment() {
-        WeeklyPayment weeklyPayment = new WeeklyPayment();
-        return weeklyPayment;
+        return new WeeklyPayment();
     }
 
     @RequestMapping(value = "/addWeek")
