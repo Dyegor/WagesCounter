@@ -61,4 +61,18 @@ public class CounterDaoImpl implements CounterDao {
         List<WeeklyPayment> weeklyPayments = session.createQuery("from WeeklyPayment", WeeklyPayment.class).list();
         return weeklyPayments;
     }
+
+    @Override
+    @Transactional
+    public String deleteTimeSheet(String weekEndingDate) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("delete from DailyReport dr where dr.weekEndingDate = :endingDate");
+        query.setParameter("endingDate", weekEndingDate);
+        int result = query.executeUpdate();
+        if (result == 0) {
+            return "incorrectInput";
+        } else {
+            return "success";
+        }
+    }
 }

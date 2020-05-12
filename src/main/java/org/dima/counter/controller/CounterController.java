@@ -5,11 +5,8 @@ import org.dima.counter.entity.payments.WeeklyPayment;
 import org.dima.counter.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/counter")
@@ -41,22 +38,23 @@ public class CounterController {
         return counterService.addWeeklyReport(weeklyHoursList);
     }
 
-    @RequestMapping(value = "/addingWeeklyPayment", method = RequestMethod.POST)
-    public String addingWeeklyPayment(@ModelAttribute("weeklyPayment") WeeklyPayment weeklyPayment,
+    @RequestMapping(value = "/addingWeeklyPayment/{weekEndingDate}", method = RequestMethod.POST)
+    public String addingWeeklyPayment(@PathVariable("weekEndingDate") String weekEndingDate,
+                                      @ModelAttribute("weeklyPayment") WeeklyPayment weeklyPayment,
                                       @ModelAttribute WeeklyHoursList weeklyHoursListCreated){
+        weeklyHoursListCreated.setWeekEndingDate(weekEndingDate);
         return counterService.addWeeklyPayment(weeklyPayment, weeklyHoursListCreated);
     }
 
     @RequestMapping(value = "/paySlipsList")
     public String showAllPayslips(Model model) {
         model.addAttribute("paySlipsList", counterService.getPaySlipsList());
-        return "paySlipsList";
+        return "weeklyReportsList";
     }
 
     @RequestMapping(value = "/showPaySlip")
-    public String showPayslipByDate(@RequestParam("weekEndingDate") String date, Model model) {
-        weeklyHoursList = counterService.getWeeklyHoursListByDate(date);
-        model.addAttribute("paySlips", weeklyHoursList);
+    public String showPayslipByDate(@RequestParam("weekEndingDate") String weekEndingDate, Model model) {
+        model.addAttribute("paySlips", counterService.getWeeklyHoursListByDate(weekEndingDate));
         return "weeklyPaySlip";
     }
 
@@ -64,5 +62,10 @@ public class CounterController {
     public String getYearlyReport(Model model) {
         model.addAttribute("paymentSummary", counterService.getYearlyPayments());
         return "yearlyReport";
+    }
+
+    @RequestMapping(value = "/deleteWeeklyReport/{weekEndingDate}")
+    public String deleteTimeSheet(@PathVariable("weekEndingDate") String weekEndingDate) {
+        return counterService.deleteTimeSheet(weekEndingDate);
     }
 }

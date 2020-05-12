@@ -17,4 +17,6 @@ public interface CounterService {
     List<String> getPaySlipsList();
 
     YearlyPayment getYearlyPayments();
+
+    String deleteTimeSheet(String weekEndingDate);
 }

@@ -61,4 +61,9 @@ public class CounterServiceImpl implements CounterService {
         paymentSummary.populateYearlyPayment(paymentSummary, allWeeklyPayments);
         return paymentSummary;
     }
+
+    @Override
+    public String deleteTimeSheet(String weekEndingDate) {
+        return counterDao.deleteTimeSheet(weekEndingDate);
+    }
 }

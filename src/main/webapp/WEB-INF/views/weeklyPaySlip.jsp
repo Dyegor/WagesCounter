@@ -35,7 +35,7 @@
     </table>
     <br> <input type="submit" value="Calculate weekly Payments"/>
 </form:form>
-<form:form action="${pageContext.request.contextPath}/counter/deleteWeeklyReport/${param.weekEndingDate}">
+<form:form action="${pageContext.request.contextPath}/counter/deleteTimeSheet/${param.weekEndingDate}">
     <input type="submit" value="Delete Timesheet"/>
 </form:form>
 </body>
