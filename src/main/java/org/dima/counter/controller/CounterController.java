@@ -46,13 +46,13 @@ public class CounterController {
     @RequestMapping(value = "/paySlipsList")
     public String showAllPayslips(Model model) {
         model.addAttribute("paySlipsList", counterService.getPaySlipsList());
-        return "weeklyReportsList";
+        return "paySlipsList";
     }
 
     @RequestMapping(value = "/showPaySlip")
     public String showPayslipByDate(@RequestParam("weekEndingDate") String weekEndingDate, Model model) {
         model.addAttribute("paySlips", counterService.getWeeklyHoursListByDate(weekEndingDate));
-        return "weeklyPaySlip";
+        return "timesheet";
     }
 
     @RequestMapping(value = "/yearlyReport")
