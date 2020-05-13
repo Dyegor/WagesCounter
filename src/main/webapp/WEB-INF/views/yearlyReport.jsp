@@ -11,7 +11,7 @@
 <html>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css"/>
 <head>
-    <title>Yearly Report</title>
+    <title>PaySlip period: ${param.weekEndingDate}</title>
 </head>
 <body>
     <table>

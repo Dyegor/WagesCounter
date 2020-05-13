@@ -36,7 +36,7 @@ public class CounterDaoImpl implements CounterDao {
     @Transactional
     public List<String> getPaySlipsList() {
         Session session = sessionFactory.getCurrentSession();
-        return (List<String>) session.createQuery("select distinct weekEndingDate from DailyReport").list();
+        return (List<String>) session.createQuery("select distinct weekEndingDate from WeeklyPayment").list();
     }
 
     @Override

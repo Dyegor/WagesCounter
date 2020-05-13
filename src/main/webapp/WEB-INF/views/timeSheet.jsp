@@ -11,12 +11,12 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css"/>
-    <title>Payslip</title>
+    <title>Timesheet period: ${param.weekEndingDate}</title>
 </head>
 <body>
 <form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyPayment/${param.weekEndingDate}">
     <input type="hidden" name="totalHours" value="${paySlips.totalHours}">
-    <label>Week Ending: ${paySlips.dailyReportsList[0].weekEndingDate}</label> <br> <br>
+    <label>Week Ending: ${param.weekEndingDate}</label> <br> <br>
     <table>
         <tr>
             <th>Day</th>

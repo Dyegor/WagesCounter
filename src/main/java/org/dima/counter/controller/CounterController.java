@@ -44,7 +44,7 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/paySlipsList")
-    public String showAllPayslips(Model model) {
+    public String getAllPaySlips(Model model) {
         model.addAttribute("paySlipsList", counterService.getPaySlipsList());
         return "paySlipsList";
     }
