@@ -15,16 +15,15 @@
 </head>
 <body>
 <form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyPayment/${param.weekEndingDate}">
-    <input type="hidden" name="totalHours" value="${paySlips.totalHours}">
+    <input type="hidden" name="totalHours" value="${timeSheet.totalHours}">
     <label>Week Ending: ${param.weekEndingDate}</label> <br> <br>
-    <table>
         <tr>
             <th>Day</th>
             <th>Time In</th>
             <th>Time Out</th>
             <th>Amount of Hours</th>
         </tr>
-        <c:forEach items="${paySlips.dailyReportsList}" var="tempPayslip">
+        <c:forEach items="${timeSheet.dailyReportsList}" var="tempPayslip">
             <tr>
                 <td>${tempPayslip.day}</td>
                 <td>${tempPayslip.startTime}</td>

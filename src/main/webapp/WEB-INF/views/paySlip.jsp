@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Dima
+  User: dmitriy
   Date: 13/05/2020
   Time: 7:43 PM
   To change this template use File | Settings | File Templates.
@@ -23,11 +23,11 @@
         <th>Total Earnings</th>
     </tr>
     <tr>
-        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.totalHours}"/></td>
-        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.grossEarnings}"/></td>
-        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.paye}"/></td>
-        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.accAmount}"/></td>
-        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.netPay}"/></td>
+        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.totalHours}"/></td>
+        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.grossEarnings}"/></td>
+        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.paye}"/></td>
+        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.accAmount}"/></td>
+        <td><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.netPay}"/></td>
     </tr>
 </table>
 </body>
