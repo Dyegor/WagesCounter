@@ -45,6 +45,11 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
+    public WeeklyPayment getPaySlipByDate(String weekEndingDate) {
+        return counterDao.getPaySlipByDate(weekEndingDate);
+    }
+
+    @Override
     public WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate) {
         WeeklyHoursList weeklyHoursList = counterDao.getWeeklyHoursListByDate(weekEndingDate);
         for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
@@ -55,7 +60,7 @@ public class CounterServiceImpl implements CounterService {
 
     @Override
     public YearlyPayment getYearlyPayments() {
-        List<WeeklyPayment> allWeeklyPayments = counterDao.getWeeklyPaymentsList();
+        List<WeeklyPayment> allWeeklyPayments = counterDao.getAllWeeklyPayments();
         YearlyPayment paymentSummary = new YearlyPayment();
         paymentSummary.populateYearlyPayment(paymentSummary, allWeeklyPayments);
         return paymentSummary;

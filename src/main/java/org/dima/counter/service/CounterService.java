@@ -11,9 +11,11 @@ public interface CounterService {
 
     String addWeeklyPayment(WeeklyPayment weeklyPayment, WeeklyHoursList weeklyHoursList);
 
-    WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
-
     List<String> getPaySlipsList();
+
+    WeeklyPayment getPaySlipByDate(String weekEndingDate);
+
+    WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
 
     YearlyPayment getYearlyPayments();
 
