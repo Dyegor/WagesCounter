@@ -19,12 +19,12 @@
     <tr>
         <th>Week: </th>
     </tr>
-    <c:forEach items="${paySlipsList}" var="paySlip">
+    <c:forEach items="${paySlipsList}" var="paySlipDate">
         <c:url var="paySlipLink" value="/counter/showPaySlip">
-            <c:param name="weekEndingDate" value="${paySlip}"/>
+            <c:param name="weekEndingDate" value="${paySlipDate}"/>
         </c:url>
         <tr>
-            <td><a href="${paySlipLink}">${paySlip}</a></td>
+            <td><a href="${paySlipLink}">${paySlipDate}</a></td>
         </tr>
     </c:forEach>
 </table>
