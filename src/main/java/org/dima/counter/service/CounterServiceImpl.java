@@ -50,11 +50,9 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate) {
-        WeeklyHoursList weeklyHoursList = counterDao.getWeeklyHoursListByDate(weekEndingDate);
-        for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
-            weeklyHoursList.setTotalHours(weeklyHoursList.calculateTotalHours(dailyReport, weeklyHoursList));
-        }
+    public WeeklyHoursList getTimeSheetByDate(String weekEndingDate) {
+        WeeklyHoursList weeklyHoursList = counterDao.getTimeSheetByDate(weekEndingDate);
+        weeklyHoursList.setWeekEndingDate(weekEndingDate);
         return weeklyHoursList;
     }
 
@@ -68,6 +66,7 @@ public class CounterServiceImpl implements CounterService {
 
     @Override
     public String deleteTimeSheet(String weekEndingDate) {
+        counterDao.deletePaySlip(weekEndingDate);
         return counterDao.deleteTimeSheet(weekEndingDate);
     }
 }

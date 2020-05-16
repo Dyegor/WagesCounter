@@ -15,9 +15,11 @@ public interface CounterDao {
 
     WeeklyPayment getPaySlipByDate(String weekEndingDate);
 
-    WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate);
+    WeeklyHoursList getTimeSheetByDate(String weekEndingDate);
 
     List<WeeklyPayment> getAllWeeklyPayments();
 
     String deleteTimeSheet(String weekEndingDate);
+
+    String deletePaySlip(String weekEndingDate);
 }

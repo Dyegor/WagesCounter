@@ -51,7 +51,7 @@ public class CounterDaoImpl implements CounterDao {
 
     @Override
     @Transactional
-    public WeeklyHoursList getWeeklyHoursListByDate(String weekEndingDate) {
+    public WeeklyHoursList getTimeSheetByDate(String weekEndingDate) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from DailyReport dr where dr.weekEndingDate = :endingDate"
                 , DailyReport.class);
@@ -74,6 +74,20 @@ public class CounterDaoImpl implements CounterDao {
     public String deleteTimeSheet(String weekEndingDate) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete from DailyReport dr where dr.weekEndingDate = :endingDate");
+        query.setParameter("endingDate", weekEndingDate);
+        int result = query.executeUpdate();
+        if (result == 0) {
+            return "incorrectInput";
+        } else {
+            return "success";
+        }
+    }
+
+    @Override
+    @Transactional
+    public String deletePaySlip(String weekEndingDate) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("delete from WeeklyPayment wp where wp.weekEndingDate = :endingDate");
         query.setParameter("endingDate", weekEndingDate);
         int result = query.executeUpdate();
         if (result == 0) {
