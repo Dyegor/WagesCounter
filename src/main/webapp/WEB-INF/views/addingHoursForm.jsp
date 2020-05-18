@@ -58,7 +58,7 @@
             <td><form:input type="time" path="dailyReportsList[6].finishTime" step="1800" size="10" pattern="[0-9:]*"/></td>
         </tr>
     </table>
-    <br> <input type="submit" value="Submit Timesheet"/>
+    <br> <input type="submit" value="Save Weekly Data"/>
 </form:form>
 </body>
 </html>
