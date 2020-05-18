@@ -30,17 +30,13 @@ public class CounterController {
         return "addingHoursForm";
     }
 
-    @RequestMapping(value = "/addingWeekHours", method = RequestMethod.POST)
-    public String addingWeek(@ModelAttribute WeeklyHoursList weeklyHoursList){
-        return counterService.addWeeklyReport(weeklyHoursList);
-    }
-
-    @RequestMapping(value = "/addingWeeklyPayment/{weekEndingDate}", method = RequestMethod.POST)
-    public String addingWeeklyPayment(@PathVariable("weekEndingDate") String weekEndingDate,
-                                      @ModelAttribute("weeklyPayment") WeeklyPayment weeklyPayment,
-                                      @ModelAttribute WeeklyHoursList weeklyHoursListCreated){
-        weeklyHoursListCreated.setWeekEndingDate(weekEndingDate);
-        return counterService.addWeeklyPayment(weeklyPayment, weeklyHoursListCreated);
+    @RequestMapping(value = "/addingWeeklyData", method = RequestMethod.POST)
+    public String addingWeeklyData(@RequestParam("weekEndingDate") String weekEndingDate,
+                             @ModelAttribute WeeklyHoursList weeklyHoursList,
+                             @ModelAttribute("weeklyPayment") WeeklyPayment weeklyPayment){
+        weeklyHoursList.setWeekEndingDate(weekEndingDate);
+        counterService.addTimeSheet(weeklyHoursList);
+        return counterService.addPaySlip(weeklyPayment, weeklyHoursList);
     }
 
     @RequestMapping(value = "/paySlipsList")
@@ -68,7 +64,7 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/deleteTimeSheet/{weekEndingDate}")
-    public String deleteTimeSheet(@PathVariable("weekEndingDate") String weekEndingDate) {
-        return counterService.deleteTimeSheet(weekEndingDate);
+    public String deleteWeeklyData(@PathVariable("weekEndingDate") String weekEndingDate) {
+        return counterService.deleteWeeklyData(weekEndingDate);
     }
 }
