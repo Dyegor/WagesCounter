@@ -7,9 +7,9 @@ import org.dima.counter.entity.payments.YearlyPayment;
 import java.util.List;
 
 public interface CounterService {
-    String addWeeklyReport(WeeklyHoursList weeklyHoursList);
+    String addTimeSheet(WeeklyHoursList weeklyHoursList);
 
-    String addWeeklyPayment(WeeklyPayment weeklyPayment, WeeklyHoursList weeklyHoursList);
+    String addPaySlip(WeeklyPayment weeklyPayment, WeeklyHoursList weeklyHoursList);
 
     List<String> getPaySlipsList();
 
@@ -19,5 +19,5 @@ public interface CounterService {
 
     YearlyPayment getYearlyPayments();
 
-    String deleteTimeSheet(String weekEndingDate);
+    String deleteWeeklyData(String weekEndingDate);
 }

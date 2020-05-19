@@ -1,5 +1,7 @@
 package org.dima.counter.entity;
 
+import org.dima.counter.buisnessLogic.HoursCounter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -63,5 +65,11 @@ public class DailyReport {
 
     public void setHoursDone(double hoursDone) {
         this.hoursDone = hoursDone;
+    }
+
+    public DailyReport populateDailyReport(DailyReport dailyReport, WeeklyHoursList weeklyHoursList) {
+        dailyReport.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
+        dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport));
+        return dailyReport;
     }
 }

@@ -63,7 +63,7 @@ public class CounterController {
         return "yearlyReport";
     }
 
-    @RequestMapping(value = "/deleteTimeSheet/{weekEndingDate}")
+    @RequestMapping(value = "/deleteWeeklyData/{weekEndingDate}")
     public String deleteWeeklyData(@PathVariable("weekEndingDate") String weekEndingDate) {
         return counterService.deleteWeeklyData(weekEndingDate);
     }
