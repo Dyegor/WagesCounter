@@ -1,9 +1,11 @@
 package org.dima.counter.buisnessLogic;
 
+import org.dima.counter.entity.payments.WeeklyPayment;
+
 public class WagesCalculator {
 
-    public static double calculateGrossEarnings(double totalHours) {
-        return totalHours * 22.5;
+    public static double calculateGrossEarnings(WeeklyPayment weeklyPayment) {
+        return weeklyPayment.getTotalHours() * weeklyPayment.getHourlyRate();
     }
 
     public static double calculatePaye(double grossEarnings) {
