@@ -39,6 +39,20 @@ public class TimeSheetDaoImpl implements TimeSheetDao{
 
     @Override
     @Transactional
+    public void updateTimeSheet(DailyReport dailyReport) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("UPDATE DailyReport dr set dr.startTime = :startTime, dr.finishTime = :finishTime, " +
+                        "dr.hoursDone = :hoursDone where dr.weekEndingDate = :endingDate and dr.day = :day");
+        query.setParameter("startTime", dailyReport.getStartTime());
+        query.setParameter("finishTime", dailyReport.getFinishTime());
+        query.setParameter("hoursDone", dailyReport.getHoursDone());
+        query.setParameter("endingDate", dailyReport.getWeekEndingDate());
+        query.setParameter("day", dailyReport.getDay());
+        query.executeUpdate();
+    }
+
+    @Override
+    @Transactional
     public String deleteTimeSheet(String weekEndingDate) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete from DailyReport dr where dr.weekEndingDate = :endingDate");

@@ -8,5 +8,7 @@ public interface TimeSheetDao {
 
     WeeklyHoursList getTimeSheetByDate(String weekEndingDate);
 
+    void updateTimeSheet(DailyReport dailyReport);
+
     String deleteTimeSheet(String weekEndingDate);
 }
