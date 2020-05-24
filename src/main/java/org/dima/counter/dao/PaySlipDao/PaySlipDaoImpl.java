@@ -49,6 +49,21 @@ public class PaySlipDaoImpl implements PaySlipDao {
 
     @Override
     @Transactional
+    public void updatePaySlip(WeeklyPayment weeklyPayment) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("UPDATE WeeklyPayment wp set wp.totalHours = :totalHours, wp.grossEarnings = :grossEarnings, " +
+                "wp.paye = :paye, wp.accAmount = :accAmount, wp.netPay = :netPay where wp.weekEndingDate = :endingDate");
+        query.setParameter("totalHours", weeklyPayment.getTotalHours());
+        query.setParameter("grossEarnings", weeklyPayment.getGrossEarnings());
+        query.setParameter("paye", weeklyPayment.getPaye());
+        query.setParameter("accAmount", weeklyPayment.getAccAmount());
+        query.setParameter("netPay", weeklyPayment.getNetPay());
+        query.setParameter("endingDate", weeklyPayment.getWeekEndingDate());
+        query.executeUpdate();
+    }
+
+    @Override
+    @Transactional
     public String deletePaySlip(String weekEndingDate) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("delete from WeeklyPayment wp where wp.weekEndingDate = :endingDate");
