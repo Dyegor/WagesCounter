@@ -37,6 +37,17 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
+    public WeeklyHoursList getTimeSheetByDate(String weekEndingDate, double hourlyRate) {
+        WeeklyHoursList weeklyHoursList = timeSheetDao.getTimeSheetByDate(weekEndingDate);
+        for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
+            weeklyHoursList.setTotalHours(weeklyHoursList.calculateTotalHours(dailyReport, weeklyHoursList));
+        }
+        weeklyHoursList.setHourlyRate(hourlyRate);
+        weeklyHoursList.setWeekEndingDate(weekEndingDate);
+        return weeklyHoursList;
+    }
+
+    @Override
     public List<String> getPaySlipsList() {
         return paySlipDao.getPaySlipsList();
     }
@@ -47,21 +58,28 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public WeeklyHoursList getTimeSheetByDate(String weekEndingDate) {
-        WeeklyHoursList weeklyHoursList = timeSheetDao.getTimeSheetByDate(weekEndingDate);
-        for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
-            weeklyHoursList.setTotalHours(weeklyHoursList.calculateTotalHours(dailyReport, weeklyHoursList));
-        }
-        weeklyHoursList.setWeekEndingDate(weekEndingDate);
-        return weeklyHoursList;
-    }
-
-    @Override
     public YearlyPayment getYearlyPayments() {
         List<WeeklyPayment> allWeeklyPayments = paySlipDao.getAllWeeklyPayments();
         YearlyPayment paymentSummary = new YearlyPayment();
         paymentSummary.populateYearlyPayment(paymentSummary, allWeeklyPayments);
         return paymentSummary;
+    }
+
+    @Override
+    public String updateTimeSheet(WeeklyHoursList weeklyHoursList) {
+        for (DailyReport dailyReport : weeklyHoursList.getDailyReportsList()) {
+            dailyReport.populateDailyReport(dailyReport, weeklyHoursList);
+            timeSheetDao.updateTimeSheet(dailyReport);
+        }
+        return "success";
+    }
+
+    @Override
+    public String updatePaySlip(WeeklyPayment weeklyPayment, WeeklyHoursList weeklyHoursList) {
+        weeklyPayment.setTotalHours(weeklyHoursList.getTotalHours());
+        weeklyPayment.populateWeek(weeklyPayment);
+        paySlipDao.updatePaySlip(weeklyPayment);
+        return "success";
     }
 
     @Override

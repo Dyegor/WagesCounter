@@ -11,13 +11,17 @@ public interface CounterService {
 
     String addPaySlip(WeeklyPayment weeklyPayment, WeeklyHoursList weeklyHoursList);
 
+    WeeklyHoursList getTimeSheetByDate(String weekEndingDate, double hourlyRate);
+
     List<String> getPaySlipsList();
 
     WeeklyPayment getPaySlipByDate(String weekEndingDate);
 
-    WeeklyHoursList getTimeSheetByDate(String weekEndingDate);
-
     YearlyPayment getYearlyPayments();
+
+    String updateTimeSheet(WeeklyHoursList weeklyHoursList);
+
+    String updatePaySlip(WeeklyPayment weeklyPayment, WeeklyHoursList weeklyHoursList);
 
     String deleteWeeklyData(String weekEndingDate);
 }

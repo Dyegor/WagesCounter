@@ -60,6 +60,12 @@ public class CounterController {
         return "yearlyReport";
     }
 
+    @RequestMapping(value = "/updateWeeklyData/")
+    public String updateWeeklyData(@ModelAttribute WeeklyHoursList weeklyHoursList, @ModelAttribute WeeklyPayment weeklyPayment) {
+        counterService.updateTimeSheet(weeklyHoursList);
+        return counterService.updatePaySlip(weeklyPayment, weeklyHoursList);
+    }
+
     @RequestMapping(value = "/deleteWeeklyData/{weekEndingDate}")
     public String deleteWeeklyData(@PathVariable("weekEndingDate") String weekEndingDate) {
         return counterService.deleteWeeklyData(weekEndingDate);
