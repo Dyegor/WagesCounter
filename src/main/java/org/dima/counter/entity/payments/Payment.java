@@ -7,6 +7,7 @@ public class Payment {
 
     private String weekEndingDate;
     private double totalHours;
+    private double hourlyRate;
     private double grossEarnings;
     private double paye;
     private double accAmount;
@@ -23,6 +24,14 @@ public class Payment {
     public double getTotalHours() { return totalHours; }
 
     public void setTotalHours(double totalHours) { this.totalHours = totalHours; }
+
+    public double getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
 
     public double getGrossEarnings() {
         return grossEarnings;

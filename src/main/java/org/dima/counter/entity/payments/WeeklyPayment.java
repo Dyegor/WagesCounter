@@ -15,7 +15,7 @@ public class WeeklyPayment extends Payment {
     private int id;
 
     public WeeklyPayment populateWeek(WeeklyPayment weeklyPayment) {
-        weeklyPayment.setGrossEarnings(WagesCalculator.calculateGrossEarnings(weeklyPayment.getTotalHours()));
+        weeklyPayment.setGrossEarnings(WagesCalculator.calculateGrossEarnings(weeklyPayment));
         weeklyPayment.setPaye(WagesCalculator.calculatePaye(weeklyPayment.getGrossEarnings()));
         weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(weeklyPayment.getGrossEarnings()));
         weeklyPayment.setNetPay(weeklyPayment.getGrossEarnings() - weeklyPayment.getPaye());

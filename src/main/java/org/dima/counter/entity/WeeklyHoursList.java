@@ -8,6 +8,7 @@ public class WeeklyHoursList {
     private List<DailyReport> dailyReportsList;
     private String weekEndingDate;
     private double totalHours;
+    private double hourlyRate;
 
     public WeeklyHoursList() {
         List<DailyReport> dailyReportList = new ArrayList<>();
@@ -47,6 +48,14 @@ public class WeeklyHoursList {
 
     public void setTotalHours(double totalHours) {
         this.totalHours = totalHours;
+    }
+
+    public double getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(double hourlyRate) {
+        this.hourlyRate = hourlyRate;
     }
 
     public double calculateTotalHours(DailyReport dailyReport, WeeklyHoursList weeklyHoursList) {

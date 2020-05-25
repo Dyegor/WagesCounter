@@ -70,6 +70,7 @@ public class DailyReport {
     public DailyReport populateDailyReport(DailyReport dailyReport, WeeklyHoursList weeklyHoursList) {
         dailyReport.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
         dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport));
+        weeklyHoursList.setTotalHours(weeklyHoursList.calculateTotalHours(dailyReport, weeklyHoursList));
         return dailyReport;
     }
 }
