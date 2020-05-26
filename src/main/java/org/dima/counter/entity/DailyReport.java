@@ -67,10 +67,9 @@ public class DailyReport {
         this.hoursDone = hoursDone;
     }
 
-    public DailyReport populateDailyReport(DailyReport dailyReport, WeeklyHoursList weeklyHoursList) {
+    public void populateDailyReport(DailyReport dailyReport, WeeklyHoursList weeklyHoursList) {
         dailyReport.setWeekEndingDate(weeklyHoursList.getWeekEndingDate());
         dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport));
         weeklyHoursList.setTotalHours(weeklyHoursList.calculateTotalHours(dailyReport, weeklyHoursList));
-        return dailyReport;
     }
 }

@@ -14,11 +14,10 @@ public class WeeklyPayment extends Payment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    public WeeklyPayment populateWeek(WeeklyPayment weeklyPayment) {
+    public void populateWeek(WeeklyPayment weeklyPayment) {
         weeklyPayment.setGrossEarnings(WagesCalculator.calculateGrossEarnings(weeklyPayment));
         weeklyPayment.setPaye(WagesCalculator.calculatePaye(weeklyPayment.getGrossEarnings()));
         weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(weeklyPayment.getGrossEarnings()));
         weeklyPayment.setNetPay(weeklyPayment.getGrossEarnings() - weeklyPayment.getPaye());
-        return weeklyPayment;
     }
 }
