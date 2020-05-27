@@ -1,11 +1,11 @@
 package org.dima.counter.buisnessLogic;
 
-import org.dima.counter.entity.payments.WeeklyPayment;
+import org.dima.counter.entity.payments.WeeklyPaySlip;
 
 public class WagesCalculator {
 
-    public static double calculateGrossEarnings(WeeklyPayment weeklyPayment) {
-        return weeklyPayment.getTotalHours() * weeklyPayment.getHourlyRate();
+    public static double calculateGrossEarnings(WeeklyPaySlip weeklyPaySlip) {
+        return weeklyPaySlip.getTotalHours() * weeklyPaySlip.getHourlyRate();
     }
 
     public static double calculatePaye(double grossEarnings) {

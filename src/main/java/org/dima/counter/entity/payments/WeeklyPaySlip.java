@@ -8,13 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class WeeklyPayment extends Payment {
+public class WeeklyPaySlip extends PaySlip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    public void populateWeek(WeeklyPayment weeklyPayment) {
+    public void populateWeek(WeeklyPaySlip weeklyPayment) {
         weeklyPayment.setGrossEarnings(WagesCalculator.calculateGrossEarnings(weeklyPayment));
         weeklyPayment.setPaye(WagesCalculator.calculatePaye(weeklyPayment.getGrossEarnings()));
         weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(weeklyPayment.getGrossEarnings()));

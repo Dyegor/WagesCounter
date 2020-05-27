@@ -4,8 +4,8 @@ import org.dima.counter.dao.PaySlipDao.PaySlipDao;
 import org.dima.counter.dao.TimeSheetDao.TimeSheetDao;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyHoursList;
-import org.dima.counter.entity.payments.WeeklyPayment;
-import org.dima.counter.entity.payments.YearlyPayment;
+import org.dima.counter.entity.payments.WeeklyPaySlip;
+import org.dima.counter.entity.payments.YearlyPaySlip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +29,10 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public String addPaySlip(WeeklyPayment weeklyPayment, WeeklyHoursList weeklyHoursList) {
-        weeklyPayment.setTotalHours(weeklyHoursList.getTotalHours());
-        weeklyPayment.populateWeek(weeklyPayment);
-        paySlipDao.addPaySlip(weeklyPayment);
+    public String addPaySlip(WeeklyPaySlip weeklyPaySlip, WeeklyHoursList weeklyHoursList) {
+        weeklyPaySlip.setTotalHours(weeklyHoursList.getTotalHours());
+        weeklyPaySlip.populateWeek(weeklyPaySlip);
+        paySlipDao.addPaySlip(weeklyPaySlip);
         return "success";
     }
 
@@ -53,15 +53,15 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public WeeklyPayment getPaySlipByDate(String weekEndingDate) {
+    public WeeklyPaySlip getPaySlipByDate(String weekEndingDate) {
         return paySlipDao.getPaySlipByDate(weekEndingDate);
     }
 
     @Override
-    public YearlyPayment getYearlyPayments() {
-        List<WeeklyPayment> allWeeklyPayments = paySlipDao.getAllWeeklyPayments();
-        YearlyPayment paymentSummary = new YearlyPayment();
-        paymentSummary.populateYearlyPayment(paymentSummary, allWeeklyPayments);
+    public YearlyPaySlip getYearlyPayments() {
+        List<WeeklyPaySlip> allWeeklyPayments = paySlipDao.getAllWeeklyPayments();
+        YearlyPaySlip paymentSummary = new YearlyPaySlip();
+        paymentSummary.populateYearlyPaySlip(paymentSummary, allWeeklyPayments);
         return paymentSummary;
     }
 
@@ -75,10 +75,10 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public String updatePaySlip(WeeklyPayment weeklyPayment, WeeklyHoursList weeklyHoursList) {
-        weeklyPayment.setTotalHours(weeklyHoursList.getTotalHours());
-        weeklyPayment.populateWeek(weeklyPayment);
-        paySlipDao.updatePaySlip(weeklyPayment);
+    public String updatePaySlip(WeeklyPaySlip weeklyPaySlip, WeeklyHoursList weeklyHoursList) {
+        weeklyPaySlip.setTotalHours(weeklyHoursList.getTotalHours());
+        weeklyPaySlip.populateWeek(weeklyPaySlip);
+        paySlipDao.updatePaySlip(weeklyPaySlip);
         return "success";
     }
 

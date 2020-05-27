@@ -3,7 +3,7 @@ package org.dima.counter.entity.payments;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class Payment {
+public class PaySlip {
 
     private String weekEndingDate;
     private double totalHours;

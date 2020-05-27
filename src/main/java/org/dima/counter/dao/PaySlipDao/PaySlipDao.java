@@ -1,21 +1,19 @@
 package org.dima.counter.dao.PaySlipDao;
 
-import org.dima.counter.entity.DailyReport;
-import org.dima.counter.entity.WeeklyHoursList;
-import org.dima.counter.entity.payments.WeeklyPayment;
+import org.dima.counter.entity.payments.WeeklyPaySlip;
 
 import java.util.List;
 
 public interface PaySlipDao {
-    void addPaySlip(WeeklyPayment weeklyPayment);
+    void addPaySlip(WeeklyPaySlip weeklyPayment);
 
     List<String> getPaySlipsList();
 
-    WeeklyPayment getPaySlipByDate(String weekEndingDate);
+    WeeklyPaySlip getPaySlipByDate(String weekEndingDate);
 
-    List<WeeklyPayment> getAllWeeklyPayments();
+    List<WeeklyPaySlip> getAllWeeklyPayments();
 
-    void updatePaySlip(WeeklyPayment weeklyPayment);
+    void updatePaySlip(WeeklyPaySlip weeklyPaySlip);
 
     String deletePaySlip(String weekEndingDate);
 }

@@ -1,7 +1,7 @@
 package org.dima.counter.controller;
 
 import org.dima.counter.entity.WeeklyHoursList;
-import org.dima.counter.entity.payments.WeeklyPayment;
+import org.dima.counter.entity.payments.WeeklyPaySlip;
 import org.dima.counter.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,9 +20,9 @@ public class CounterController {
         return new WeeklyHoursList();
     }
 
-    @ModelAttribute("weeklyPayment")
-    public WeeklyPayment populateWeeklyPayment() {
-        return new WeeklyPayment();
+    @ModelAttribute("weeklyPaySlip")
+    public WeeklyPaySlip populateWeeklyPaySlip() {
+        return new WeeklyPaySlip();
     }
 
     @RequestMapping(value = "/addWeek")
@@ -31,9 +31,9 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/addingWeeklyData", method = RequestMethod.POST)
-    public String addingWeeklyData(@ModelAttribute WeeklyHoursList weeklyHoursList, @ModelAttribute WeeklyPayment weeklyPayment){
+    public String addingWeeklyData(@ModelAttribute WeeklyHoursList weeklyHoursList, @ModelAttribute WeeklyPaySlip weeklyPaySlip) {
         counterService.addTimeSheet(weeklyHoursList);
-        return counterService.addPaySlip(weeklyPayment, weeklyHoursList);
+        return counterService.addPaySlip(weeklyPaySlip, weeklyHoursList);
     }
 
     @RequestMapping(value = "/paySlipsList")
@@ -43,15 +43,15 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/showTimeSheet/{weekEndingDate}")
-    public String getTimeSheetByDate(@ModelAttribute WeeklyPayment weeklyPayment, Model model) {
-        model.addAttribute("timeSheet", counterService.getTimeSheetByDate(weeklyPayment.getWeekEndingDate(), weeklyPayment.getHourlyRate()));
+    public String getTimeSheetByDate(@ModelAttribute WeeklyPaySlip weeklyPaySlip, Model model) {
+        model.addAttribute("timeSheet", counterService.getTimeSheetByDate(weeklyPaySlip.getWeekEndingDate(), weeklyPaySlip.getHourlyRate()));
         return "timeSheetDetails";
     }
 
     @RequestMapping(value = "/showPaySlip")
     public String getPaySlipByDate(@RequestParam("weekEndingDate") String weekEndingDate, Model model) {
         model.addAttribute("paySlip", counterService.getPaySlipByDate(weekEndingDate));
-        return "paySlip";
+        return "paySlipDetails";
     }
 
     @RequestMapping(value = "/yearlyReport")
@@ -61,9 +61,9 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/updateWeeklyData/")
-    public String updateWeeklyData(@ModelAttribute WeeklyHoursList weeklyHoursList, @ModelAttribute WeeklyPayment weeklyPayment) {
+    public String updateWeeklyData(@ModelAttribute WeeklyHoursList weeklyHoursList, @ModelAttribute WeeklyPaySlip weeklyPaySlip) {
         counterService.updateTimeSheet(weeklyHoursList);
-        return counterService.updatePaySlip(weeklyPayment, weeklyHoursList);
+        return counterService.updatePaySlip(weeklyPaySlip, weeklyHoursList);
     }
 
     @RequestMapping(value = "/deleteWeeklyData/{weekEndingDate}")
