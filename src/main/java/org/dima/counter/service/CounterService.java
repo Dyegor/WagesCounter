@@ -1,17 +1,17 @@
 package org.dima.counter.service;
 
-import org.dima.counter.entity.WeeklyHoursList;
+import org.dima.counter.entity.WeeklyTimeSheet;
 import org.dima.counter.entity.payments.WeeklyPaySlip;
 import org.dima.counter.entity.payments.YearlyPaySlip;
 
 import java.util.List;
 
 public interface CounterService {
-    String addTimeSheet(WeeklyHoursList weeklyHoursList);
+    void addTimeSheet(WeeklyTimeSheet weeklyTimeSheet);
 
-    String addPaySlip(WeeklyPaySlip weeklyPaySlip, WeeklyHoursList weeklyHoursList);
+    String addPaySlip(WeeklyPaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet);
 
-    WeeklyHoursList getTimeSheetByDate(String weekEndingDate, double hourlyRate);
+    WeeklyTimeSheet getTimeSheetByDate(String weekEndingDate, double hourlyRate);
 
     List<String> getPaySlipsList();
 
@@ -19,9 +19,9 @@ public interface CounterService {
 
     YearlyPaySlip getYearlyPayments();
 
-    String updateTimeSheet(WeeklyHoursList weeklyHoursList);
+    void updateTimeSheet(WeeklyTimeSheet weeklyTimeSheet);
 
-    String updatePaySlip(WeeklyPaySlip weeklyPaySlip, WeeklyHoursList weeklyHoursList);
+    String updatePaySlip(WeeklyPaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet);
 
     String deleteWeeklyData(String weekEndingDate);
 }

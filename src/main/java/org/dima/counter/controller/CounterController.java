@@ -1,6 +1,6 @@
 package org.dima.counter.controller;
 
-import org.dima.counter.entity.WeeklyHoursList;
+import org.dima.counter.entity.WeeklyTimeSheet;
 import org.dima.counter.entity.payments.WeeklyPaySlip;
 import org.dima.counter.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,9 @@ public class CounterController {
     @Autowired
     private CounterService counterService;
 
-    @ModelAttribute("weeklyHoursList")
-    public WeeklyHoursList populateWeek() {
-        return new WeeklyHoursList();
+    @ModelAttribute("weeklyTimeSheet")
+    public WeeklyTimeSheet populateWeek() {
+        return new WeeklyTimeSheet();
     }
 
     @ModelAttribute("weeklyPaySlip")
@@ -31,9 +31,9 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/addingWeeklyData", method = RequestMethod.POST)
-    public String addingWeeklyData(@ModelAttribute WeeklyHoursList weeklyHoursList, @ModelAttribute WeeklyPaySlip weeklyPaySlip) {
-        counterService.addTimeSheet(weeklyHoursList);
-        return counterService.addPaySlip(weeklyPaySlip, weeklyHoursList);
+    public String addingWeeklyData(@ModelAttribute WeeklyTimeSheet weeklyTimeSheet, @ModelAttribute WeeklyPaySlip weeklyPaySlip) {
+        counterService.addTimeSheet(weeklyTimeSheet);
+        return counterService.addPaySlip(weeklyPaySlip, weeklyTimeSheet);
     }
 
     @RequestMapping(value = "/paySlipsList")
@@ -61,9 +61,9 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/updateWeeklyData/")
-    public String updateWeeklyData(@ModelAttribute WeeklyHoursList weeklyHoursList, @ModelAttribute WeeklyPaySlip weeklyPaySlip) {
-        counterService.updateTimeSheet(weeklyHoursList);
-        return counterService.updatePaySlip(weeklyPaySlip, weeklyHoursList);
+    public String updateWeeklyData(@ModelAttribute WeeklyTimeSheet weeklyTimeSheet, @ModelAttribute WeeklyPaySlip weeklyPaySlip) {
+        counterService.updateTimeSheet(weeklyTimeSheet);
+        return counterService.updatePaySlip(weeklyPaySlip, weeklyTimeSheet);
     }
 
     @RequestMapping(value = "/deleteWeeklyData/{weekEndingDate}")

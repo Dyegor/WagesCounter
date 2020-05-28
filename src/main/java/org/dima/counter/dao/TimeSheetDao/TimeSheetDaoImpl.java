@@ -1,7 +1,7 @@
 package org.dima.counter.dao.TimeSheetDao;
 
 import org.dima.counter.entity.DailyReport;
-import org.dima.counter.entity.WeeklyHoursList;
+import org.dima.counter.entity.WeeklyTimeSheet;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -26,15 +26,15 @@ public class TimeSheetDaoImpl implements TimeSheetDao{
 
     @Override
     @Transactional
-    public WeeklyHoursList getTimeSheetByDate(String weekEndingDate) {
+    public WeeklyTimeSheet getTimeSheetByDate(String weekEndingDate) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from DailyReport dr where dr.weekEndingDate = :endingDate"
                 , DailyReport.class);
         query.setParameter("endingDate", weekEndingDate);
         List<DailyReport> dailyReports = query.list();
-        WeeklyHoursList weeklyHoursList = new WeeklyHoursList();
-        weeklyHoursList.setDailyReportsList(dailyReports);
-        return weeklyHoursList;
+        WeeklyTimeSheet weeklyTimeSheet = new WeeklyTimeSheet();
+        weeklyTimeSheet.setDailyReportsList(dailyReports);
+        return weeklyTimeSheet;
     }
 
     @Override

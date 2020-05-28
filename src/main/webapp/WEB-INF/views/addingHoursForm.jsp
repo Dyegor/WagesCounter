@@ -14,7 +14,7 @@
     <title>TimeSheet</title>
 </head>
 <body>
-<form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyData" modelAttribute="weeklyHoursList">
+<form:form method="post" action="${pageContext.request.contextPath}/counter/addingWeeklyData" modelAttribute="weeklyTimeSheet">
     <label>Week Ending: </label>
     <form:input type="date" path="weekEndingDate"/>
     <label>Hourly Rate : </label>
@@ -25,7 +25,7 @@
             <th>Time In</th>
             <th>Time Out</th>
         </tr>
-        <c:forEach items="${weeklyHoursList.dailyReportsList}" var="tempDailyReportsList" varStatus="loop">
+        <c:forEach items="${weeklyTimeSheet.dailyReportsList}" var="tempDailyReportsList" varStatus="loop">
         <tr>
             <td><c:out value="${tempDailyReportsList.day}"/></td>
             <td><form:input type="time" path="dailyReportsList[${loop.index}].startTime" step="1800" size="10" pattern="[0-9:]*"/></td>

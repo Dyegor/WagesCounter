@@ -3,14 +3,14 @@ package org.dima.counter.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeeklyHoursList {
+public class WeeklyTimeSheet {
 
     private List<DailyReport> dailyReportsList;
     private String weekEndingDate;
     private double totalHours;
     private double hourlyRate;
 
-    public WeeklyHoursList() {
+    public WeeklyTimeSheet() {
         List<DailyReport> dailyReportList = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             dailyReportList.add(new DailyReport());
@@ -58,9 +58,9 @@ public class WeeklyHoursList {
         this.hourlyRate = hourlyRate;
     }
 
-    public double calculateTotalHours(DailyReport dailyReport, WeeklyHoursList weeklyHoursList) {
+    public double calculateTotalHours(DailyReport dailyReport, WeeklyTimeSheet weeklyTimeSheet) {
         double dailyHours = dailyReport.getHoursDone();
-        double totalHours = weeklyHoursList.getTotalHours();
+        double totalHours = weeklyTimeSheet.getTotalHours();
 
         if (dailyReport.getDay().equals("Saturday") || dailyReport.getDay().equals("Sunday") || totalHours > 45) {
             totalHours += dailyHours * 1.5;

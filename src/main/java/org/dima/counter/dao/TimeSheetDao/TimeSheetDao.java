@@ -1,12 +1,12 @@
 package org.dima.counter.dao.TimeSheetDao;
 
 import org.dima.counter.entity.DailyReport;
-import org.dima.counter.entity.WeeklyHoursList;
+import org.dima.counter.entity.WeeklyTimeSheet;
 
 public interface TimeSheetDao {
     void addTimeSheet(DailyReport dailyReport);
 
-    WeeklyHoursList getTimeSheetByDate(String weekEndingDate);
+    WeeklyTimeSheet getTimeSheetByDate(String weekEndingDate);
 
     void updateTimeSheet(DailyReport dailyReport);
 
