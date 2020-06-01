@@ -4,8 +4,7 @@ import org.dima.counter.dao.PaySlipDao.PaySlipDao;
 import org.dima.counter.dao.TimeSheetDao.TimeSheetDao;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyTimeSheet;
-import org.dima.counter.entity.payments.WeeklyPaySlip;
-import org.dima.counter.entity.payments.YearlyPaySlip;
+import org.dima.counter.entity.payments.PaySlip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +27,7 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public String addPaySlip(WeeklyPaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
+    public String addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
         weeklyPaySlip.setTotalHours(weeklyTimeSheet.getTotalHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
         paySlipDao.addPaySlip(weeklyPaySlip);
@@ -52,14 +51,14 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public WeeklyPaySlip getPaySlipByDate(String weekEndingDate) {
+    public PaySlip getPaySlipByDate(String weekEndingDate) {
         return paySlipDao.getPaySlipByDate(weekEndingDate);
     }
 
     @Override
-    public YearlyPaySlip getYearlyPayments() {
-        List<WeeklyPaySlip> allWeeklyPayments = paySlipDao.getAllWeeklyPayments();
-        YearlyPaySlip paymentSummary = new YearlyPaySlip();
+    public PaySlip getYearlyPayments() {
+        List<PaySlip> allWeeklyPayments = paySlipDao.getAllWeeklyPayments();
+        PaySlip paymentSummary = new PaySlip();
         paymentSummary.populateYearlyPaySlip(paymentSummary, allWeeklyPayments);
         return paymentSummary;
     }
@@ -73,7 +72,7 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public String updatePaySlip(WeeklyPaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
+    public String updatePaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
         weeklyPaySlip.setTotalHours(weeklyTimeSheet.getTotalHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
         paySlipDao.updatePaySlip(weeklyPaySlip);

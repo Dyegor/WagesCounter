@@ -1,7 +1,8 @@
 package org.dima.counter.controller;
 
+import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyTimeSheet;
-import org.dima.counter.entity.payments.WeeklyPaySlip;
+import org.dima.counter.entity.payments.PaySlip;
 import org.dima.counter.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -21,8 +22,8 @@ public class CounterController {
     }
 
     @ModelAttribute("weeklyPaySlip")
-    public WeeklyPaySlip populateWeeklyPaySlip() {
-        return new WeeklyPaySlip();
+    public PaySlip populateWeeklyPaySlip() {
+        return new PaySlip();
     }
 
     @RequestMapping(value = "/addWeek")
@@ -31,7 +32,7 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/addingWeeklyData", method = RequestMethod.POST)
-    public String addingWeeklyData(@ModelAttribute WeeklyTimeSheet weeklyTimeSheet, @ModelAttribute WeeklyPaySlip weeklyPaySlip) {
+    public String addingWeeklyData(@ModelAttribute WeeklyTimeSheet weeklyTimeSheet, @ModelAttribute PaySlip weeklyPaySlip) {
         counterService.addTimeSheet(weeklyTimeSheet);
         return counterService.addPaySlip(weeklyPaySlip, weeklyTimeSheet);
     }
@@ -43,7 +44,7 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/showTimeSheet/{weekEndingDate}")
-    public String getTimeSheetByDate(@ModelAttribute WeeklyPaySlip weeklyPaySlip, Model model) {
+    public String getTimeSheetByDate(@ModelAttribute PaySlip weeklyPaySlip, Model model) {
         model.addAttribute("timeSheet", counterService.getTimeSheetByDate(weeklyPaySlip.getWeekEndingDate(), weeklyPaySlip.getHourlyRate()));
         return "timeSheetDetails";
     }
@@ -61,7 +62,7 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/updateWeeklyData/")
-    public String updateWeeklyData(@ModelAttribute WeeklyTimeSheet weeklyTimeSheet, @ModelAttribute WeeklyPaySlip weeklyPaySlip) {
+    public String updateWeeklyData(@ModelAttribute WeeklyTimeSheet weeklyTimeSheet, @ModelAttribute PaySlip weeklyPaySlip) {
         counterService.updateTimeSheet(weeklyTimeSheet);
         return counterService.updatePaySlip(weeklyPaySlip, weeklyTimeSheet);
     }

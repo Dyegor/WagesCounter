@@ -1,10 +1,19 @@
 package org.dima.counter.entity.payments;
 
+import org.dima.counter.buisnessLogic.WagesCalculator;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.util.List;
 
 @MappedSuperclass
 public class PaySlip {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String weekEndingDate;
     private double totalHours;
     private double hourlyRate;
@@ -12,6 +21,14 @@ public class PaySlip {
     private double paye;
     private double accAmount;
     private double netPay;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getWeekEndingDate() {
         return weekEndingDate;
@@ -63,5 +80,22 @@ public class PaySlip {
 
     public void setNetPay(double netPay) {
         this.netPay = netPay;
+    }
+
+    public void populateWeek(PaySlip weeklyPayment) {
+        weeklyPayment.setGrossEarnings(WagesCalculator.calculateGrossEarnings(weeklyPayment));
+        weeklyPayment.setPaye(WagesCalculator.calculatePaye(weeklyPayment.getGrossEarnings()));
+        weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(weeklyPayment.getGrossEarnings()));
+        weeklyPayment.setNetPay(weeklyPayment.getGrossEarnings() - weeklyPayment.getPaye());
+    }
+
+    public void populateYearlyPaySlip(PaySlip yearlyPaySlip, List<PaySlip> allWeeklyPayments) {
+        for (PaySlip weeklyPaySlip : allWeeklyPayments) {
+            yearlyPaySlip.setTotalHours(yearlyPaySlip.getTotalHours() + weeklyPaySlip.getTotalHours());
+            yearlyPaySlip.setAccAmount(yearlyPaySlip.getAccAmount() + weeklyPaySlip.getAccAmount());
+            yearlyPaySlip.setGrossEarnings(yearlyPaySlip.getGrossEarnings() + weeklyPaySlip.getGrossEarnings());
+            yearlyPaySlip.setNetPay(yearlyPaySlip.getNetPay() + weeklyPaySlip.getNetPay());
+            yearlyPaySlip.setPaye(yearlyPaySlip.getPaye() + weeklyPaySlip.getPaye());
+        }
     }
 }

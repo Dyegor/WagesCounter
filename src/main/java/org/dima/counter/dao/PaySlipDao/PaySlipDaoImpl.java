@@ -1,6 +1,6 @@
 package org.dima.counter.dao.PaySlipDao;
 
-import org.dima.counter.entity.payments.WeeklyPaySlip;
+import org.dima.counter.entity.payments.PaySlip;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -18,7 +18,7 @@ public class PaySlipDaoImpl implements PaySlipDao {
 
     @Override
     @Transactional
-    public void addPaySlip(WeeklyPaySlip weeklyPaySlip) {
+    public void addPaySlip(PaySlip weeklyPaySlip) {
         Session session = sessionFactory.getCurrentSession();
         session.save(weeklyPaySlip);
     }
@@ -32,24 +32,24 @@ public class PaySlipDaoImpl implements PaySlipDao {
 
     @Override
     @Transactional
-    public WeeklyPaySlip getPaySlipByDate(String weekEndingDate) {
+    public PaySlip getPaySlipByDate(String weekEndingDate) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from WeeklyPaySlip wp where wp.weekEndingDate = :endingDate"
-                , WeeklyPaySlip.class);
+                , PaySlip.class);
         query.setParameter("endingDate", weekEndingDate);
-        return (WeeklyPaySlip) query.uniqueResult();
+        return (PaySlip) query.uniqueResult();
     }
 
     @Override
     @Transactional
-    public List<WeeklyPaySlip> getAllWeeklyPayments() {
+    public List<PaySlip> getAllWeeklyPayments() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from WeeklyPaySlip", WeeklyPaySlip.class).list();
+        return session.createQuery("from PaySlip", PaySlip.class).list();
     }
 
     @Override
     @Transactional
-    public void updatePaySlip(WeeklyPaySlip weeklyPayment) {
+    public void updatePaySlip(PaySlip weeklyPayment) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("UPDATE WeeklyPaySlip wp set wp.totalHours = :totalHours, wp.grossEarnings = :grossEarnings, " +
                 "wp.paye = :paye, wp.accAmount = :accAmount, wp.netPay = :netPay where wp.weekEndingDate = :endingDate");
