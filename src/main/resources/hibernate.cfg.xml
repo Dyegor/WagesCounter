@@ -15,9 +15,5 @@
         <property name="show_sql">false</property>
 
         <property name="hibernate.hbm2ddl.auto">update</property>
-
-        <mapping class="org.dima.counter.entity.DailyReport"/>
-        <mapping class="org.dima.counter.entity.WeeklyHoursList"/>
-        <mapping class="org.dima.counter.entity.payments.WeeklyPayment"/>
     </session-factory>
 </hibernate-configuration>
