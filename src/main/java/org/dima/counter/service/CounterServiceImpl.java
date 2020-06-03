@@ -1,10 +1,9 @@
 package org.dima.counter.service;
 
-import org.dima.counter.dao.PaySlipDao.PaySlipDao;
-import org.dima.counter.dao.TimeSheetDao.TimeSheetDao;
+import org.dima.counter.dao.CounterDao;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyTimeSheet;
-import org.dima.counter.entity.payments.PaySlip;
+import org.dima.counter.entity.PaySlip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +13,13 @@ import java.util.List;
 public class CounterServiceImpl implements CounterService {
 
     @Autowired
-    private PaySlipDao paySlipDao;
-    @Autowired
-    private TimeSheetDao timeSheetDao;
+    private CounterDao counterDao;
 
     @Override
     public void addTimeSheet(WeeklyTimeSheet weeklyTimeSheet) {
         for (DailyReport dailyReport : weeklyTimeSheet.getDailyReportsList()) {
             dailyReport.populateDailyReport(dailyReport, weeklyTimeSheet);
-            timeSheetDao.addTimeSheet(dailyReport);
+            counterDao.addTimeSheet(dailyReport);
         }
     }
 
@@ -30,13 +27,13 @@ public class CounterServiceImpl implements CounterService {
     public String addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
         weeklyPaySlip.setTotalHours(weeklyTimeSheet.getTotalHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
-        paySlipDao.addPaySlip(weeklyPaySlip);
+        counterDao.addPaySlip(weeklyPaySlip);
         return "success";
     }
 
     @Override
     public WeeklyTimeSheet getTimeSheetByDate(String weekEndingDate, double hourlyRate) {
-        WeeklyTimeSheet weeklyTimeSheet = timeSheetDao.getTimeSheetByDate(weekEndingDate);
+        WeeklyTimeSheet weeklyTimeSheet = counterDao.getTimeSheetByDate(weekEndingDate);
         for (DailyReport dailyReport : weeklyTimeSheet.getDailyReportsList()) {
             weeklyTimeSheet.setTotalHours(weeklyTimeSheet.calculateTotalHours(dailyReport, weeklyTimeSheet));
         }
@@ -47,17 +44,17 @@ public class CounterServiceImpl implements CounterService {
 
     @Override
     public List<String> getPaySlipsList() {
-        return paySlipDao.getPaySlipsList();
+        return counterDao.getPaySlipsList();
     }
 
     @Override
     public PaySlip getPaySlipByDate(String weekEndingDate) {
-        return paySlipDao.getPaySlipByDate(weekEndingDate);
+        return counterDao.getPaySlipByDate(weekEndingDate);
     }
 
     @Override
     public PaySlip getYearlyPayments() {
-        List<PaySlip> allWeeklyPayments = paySlipDao.getAllWeeklyPayments();
+        List<PaySlip> allWeeklyPayments = counterDao.getAllWeeklyPayments();
         PaySlip paymentSummary = new PaySlip();
         paymentSummary.populateYearlyPaySlip(paymentSummary, allWeeklyPayments);
         return paymentSummary;
@@ -67,7 +64,7 @@ public class CounterServiceImpl implements CounterService {
     public void updateTimeSheet(WeeklyTimeSheet weeklyTimeSheet) {
         for (DailyReport dailyReport : weeklyTimeSheet.getDailyReportsList()) {
             dailyReport.populateDailyReport(dailyReport, weeklyTimeSheet);
-            timeSheetDao.updateTimeSheet(dailyReport);
+            counterDao.updateTimeSheet(dailyReport);
         }
     }
 
@@ -75,13 +72,13 @@ public class CounterServiceImpl implements CounterService {
     public String updatePaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
         weeklyPaySlip.setTotalHours(weeklyTimeSheet.getTotalHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
-        paySlipDao.updatePaySlip(weeklyPaySlip);
+        counterDao.updatePaySlip(weeklyPaySlip);
         return "success";
     }
 
     @Override
     public String deleteWeeklyData(String weekEndingDate) {
-        paySlipDao.deletePaySlip(weekEndingDate);
-        return timeSheetDao.deleteTimeSheet(weekEndingDate);
+        counterDao.deletePaySlip(weekEndingDate);
+        return counterDao.deleteTimeSheet(weekEndingDate);
     }
 }

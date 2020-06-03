@@ -1,8 +1,7 @@
 package org.dima.counter.controller;
 
-import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyTimeSheet;
-import org.dima.counter.entity.payments.PaySlip;
+import org.dima.counter.entity.PaySlip;
 import org.dima.counter.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

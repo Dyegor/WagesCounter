@@ -1,7 +1,7 @@
 package org.dima.counter.service;
 
 import org.dima.counter.entity.WeeklyTimeSheet;
-import org.dima.counter.entity.payments.PaySlip;
+import org.dima.counter.entity.PaySlip;
 
 import java.util.List;
 
