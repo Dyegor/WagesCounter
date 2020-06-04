@@ -1,5 +1,6 @@
 package org.dima.counter.service;
 
+import org.dima.counter.buisnessLogic.HoursCounter;
 import org.dima.counter.dao.CounterDao;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyTimeSheet;
@@ -35,7 +36,7 @@ public class CounterServiceImpl implements CounterService {
     public WeeklyTimeSheet getTimeSheetByDate(String weekEndingDate, double hourlyRate) {
         WeeklyTimeSheet weeklyTimeSheet = counterDao.getTimeSheetByDate(weekEndingDate);
         for (DailyReport dailyReport : weeklyTimeSheet.getDailyReportsList()) {
-            weeklyTimeSheet.setTotalHours(weeklyTimeSheet.calculateTotalHours(dailyReport, weeklyTimeSheet));
+            weeklyTimeSheet.setTotalHours(HoursCounter.calculateTotalHours(dailyReport, weeklyTimeSheet));
         }
         weeklyTimeSheet.setHourlyRate(hourlyRate);
         weeklyTimeSheet.setWeekEndingDate(weekEndingDate);

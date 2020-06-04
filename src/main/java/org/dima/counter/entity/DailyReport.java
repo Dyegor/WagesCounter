@@ -70,6 +70,6 @@ public class DailyReport {
     public void populateDailyReport(DailyReport dailyReport, WeeklyTimeSheet weeklyTimeSheet) {
         dailyReport.setWeekEndingDate(weeklyTimeSheet.getWeekEndingDate());
         dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport));
-        weeklyTimeSheet.setTotalHours(weeklyTimeSheet.calculateTotalHours(dailyReport, weeklyTimeSheet));
+        weeklyTimeSheet.setTotalHours(HoursCounter.calculateTotalHours(dailyReport, weeklyTimeSheet));
     }
 }

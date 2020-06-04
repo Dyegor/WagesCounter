@@ -1,6 +1,7 @@
 package org.dima.counter.buisnessLogic;
 
 import org.dima.counter.entity.DailyReport;
+import org.dima.counter.entity.WeeklyTimeSheet;
 
 import java.time.LocalTime;
 
@@ -20,5 +21,19 @@ public class HoursCounter {
 
         long difference = java.time.Duration.between(time1, time2).toMinutes();
         return (double) difference / 60;
+    }
+
+    public static double calculateTotalHours(DailyReport dailyReport, WeeklyTimeSheet weeklyTimeSheet) {
+        double dailyHours = dailyReport.getHoursDone();
+        double totalHours = weeklyTimeSheet.getTotalHours();
+
+        if (dailyReport.getDay().equals("Saturday") || dailyReport.getDay().equals("Sunday") || totalHours > 45) {
+            totalHours += dailyHours * 1.5;
+        } else if ((totalHours + dailyHours) > 45) {
+            totalHours = 45 + (totalHours + dailyHours - 45) * 1.5;
+        } else {
+            totalHours += dailyHours;
+        }
+        return totalHours;
     }
 }

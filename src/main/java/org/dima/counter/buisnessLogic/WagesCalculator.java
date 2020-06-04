@@ -1,10 +1,10 @@
 package org.dima.counter.buisnessLogic;
 
-import org.dima.counter.entity.payments.WeeklyPaySlip;
+import org.dima.counter.entity.PaySlip;
 
 public class WagesCalculator {
 
-    public static double calculateGrossEarnings(WeeklyPaySlip weeklyPaySlip) {
+    public static double calculateGrossEarnings(PaySlip weeklyPaySlip) {
         return weeklyPaySlip.getTotalHours() * weeklyPaySlip.getHourlyRate();
     }
 

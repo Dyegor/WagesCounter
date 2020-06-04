@@ -57,18 +57,5 @@ public class WeeklyTimeSheet {
     public void setHourlyRate(double hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
-
-    public double calculateTotalHours(DailyReport dailyReport, WeeklyTimeSheet weeklyTimeSheet) {
-        double dailyHours = dailyReport.getHoursDone();
-        double totalHours = weeklyTimeSheet.getTotalHours();
-
-        if (dailyReport.getDay().equals("Saturday") || dailyReport.getDay().equals("Sunday") || totalHours > 45) {
-            totalHours += dailyHours * 1.5;
-        } else if ((totalHours + dailyHours) > 45) {
-            totalHours = 45 + (totalHours + dailyHours - 45) * 1.5;
-        } else {
-            totalHours += dailyHours;
-        }
-        return totalHours;
-    }
 }
+
