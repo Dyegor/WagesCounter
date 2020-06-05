@@ -8,7 +8,7 @@ import java.util.List;
 public interface CounterService {
     void addTimeSheet(WeeklyTimeSheet weeklyTimeSheet);
 
-    String addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet);
+    void addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet);
 
     WeeklyTimeSheet getTimeSheetByDate(String weekEndingDate, double hourlyRate);
 
@@ -20,7 +20,7 @@ public interface CounterService {
 
     void updateTimeSheet(WeeklyTimeSheet weeklyTimeSheet);
 
-    String updatePaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet);
+    void updatePaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet);
 
     String deleteWeeklyData(String weekEndingDate);
 }

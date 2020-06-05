@@ -25,11 +25,10 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public String addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
+    public void addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
         weeklyPaySlip.setTotalHours(weeklyTimeSheet.getTotalHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
         counterDao.addPaySlip(weeklyPaySlip);
-        return "success";
     }
 
     @Override
@@ -70,11 +69,10 @@ public class CounterServiceImpl implements CounterService {
     }
 
     @Override
-    public String updatePaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
+    public void updatePaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
         weeklyPaySlip.setTotalHours(weeklyTimeSheet.getTotalHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
         counterDao.updatePaySlip(weeklyPaySlip);
-        return "success";
     }
 
     @Override

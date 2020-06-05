@@ -30,10 +30,16 @@ public class CounterController {
         return "addingHoursForm";
     }
 
+    @RequestMapping(value = "/success", method = RequestMethod.GET)
+    public String successPage() {
+        return "success";
+    }
+
     @RequestMapping(value = "/addingWeeklyData", method = RequestMethod.POST)
     public String addingWeeklyData(@ModelAttribute WeeklyTimeSheet weeklyTimeSheet, @ModelAttribute PaySlip weeklyPaySlip) {
         counterService.addTimeSheet(weeklyTimeSheet);
-        return counterService.addPaySlip(weeklyPaySlip, weeklyTimeSheet);
+        counterService.addPaySlip(weeklyPaySlip, weeklyTimeSheet);
+        return "redirect:/counter/success";
     }
 
     @RequestMapping(value = "/paySlipsList")
@@ -63,7 +69,8 @@ public class CounterController {
     @RequestMapping(value = "/updateWeeklyData/")
     public String updateWeeklyData(@ModelAttribute WeeklyTimeSheet weeklyTimeSheet, @ModelAttribute PaySlip weeklyPaySlip) {
         counterService.updateTimeSheet(weeklyTimeSheet);
-        return counterService.updatePaySlip(weeklyPaySlip, weeklyTimeSheet);
+        counterService.updatePaySlip(weeklyPaySlip, weeklyTimeSheet);
+        return "redirect:/counter/success";
     }
 
     @RequestMapping(value = "/deleteWeeklyData/{weekEndingDate}")
