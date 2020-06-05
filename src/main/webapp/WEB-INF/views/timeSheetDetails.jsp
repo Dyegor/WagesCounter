@@ -9,6 +9,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%
+    response.setHeader("Pragma", "No-cache");
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setDateHeader("Expires", 0);
+%>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css"/>
