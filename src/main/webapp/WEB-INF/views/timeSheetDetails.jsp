@@ -41,8 +41,9 @@
     </table>
     <input type="submit" value="Update Weekly Data"/>
 </form:form>
-<form:form action="${pageContext.request.contextPath}/counter/deleteTimeSheet/${param.weekEndingDate}">
+<form:form action="${pageContext.request.contextPath}/counter/deleteWeeklyData/${param.weekEndingDate}">
     <input type="submit" value="Delete Weekly Data"/>
 </form:form>
+<button type="button" onclick="window.location='${pageContext.request.contextPath}'">Back to Homepage</button>
 </body>
 </html>

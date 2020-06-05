@@ -37,8 +37,9 @@
     <form:hidden path="hourlyRate"/>
     <input type="submit" value="See Detailed TimeSheet"/>
 </form:form>
-<form:form action="${pageContext.request.contextPath}/counter/deleteTimeSheet/${paySlip.weekEndingDate}">
-    <input type="submit" value="Delete TimeSheet"/>
+<form:form action="${pageContext.request.contextPath}/counter/deleteWeeklyData/${paySlip.weekEndingDate}">
+    <input type="submit" value="Delete WeeklyData"/>
 </form:form>
+<button type="button" onclick="window.location='${pageContext.request.contextPath}'">Back to Homepage</button>
 </body>
 </html>
