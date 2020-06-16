@@ -84,10 +84,11 @@ public class PaySlip {
     }
 
     public void populateWeek(PaySlip weeklyPayment) {
-        weeklyPayment.setGrossEarnings(WagesCalculator.calculateGrossEarnings(weeklyPayment));
-        weeklyPayment.setPaye(WagesCalculator.calculatePaye(weeklyPayment.getGrossEarnings()));
-        weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(weeklyPayment.getGrossEarnings()));
-        weeklyPayment.setNetPay(weeklyPayment.getGrossEarnings() - weeklyPayment.getPaye());
+        double grossEarnings = WagesCalculator.calculateGrossEarnings(weeklyPayment.getTotalHours(), weeklyPayment.getHourlyRate());
+        weeklyPayment.setGrossEarnings(grossEarnings);
+        weeklyPayment.setPaye(WagesCalculator.calculatePaye(grossEarnings));
+        weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(grossEarnings));
+        weeklyPayment.setNetPay(grossEarnings - weeklyPayment.getPaye());
     }
 
     public void populateYearlyPaySlip(PaySlip yearlyPaySlip, List<PaySlip> allWeeklyPayments) {
