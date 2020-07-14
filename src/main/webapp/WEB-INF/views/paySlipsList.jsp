@@ -28,6 +28,6 @@
         </tr>
     </c:forEach>
 </table>
-<button type="button" onclick="window.location='${pageContext.request.contextPath}'">Back to Homepage</button>
+<button type="button" onclick="window.location='${pageContext.request.contextPath}/index.jsp'">Back to Homepage</button>
 </body>
 </html>

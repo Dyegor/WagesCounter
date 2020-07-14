@@ -16,6 +16,6 @@
 <form:form action="${pageContext.request.contextPath}/counter/addWeek">
     <button>Create a new Timesheet</button>
 </form:form>
-<button type="button" onclick="window.location='${pageContext.request.contextPath}'">Back to Homepage</button>
+<button type="button" onclick="window.location='${pageContext.request.contextPath}/index.jsp'">Back to Homepage</button>
 </body>
 </html>

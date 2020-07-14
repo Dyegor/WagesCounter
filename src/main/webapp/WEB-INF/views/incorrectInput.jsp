@@ -17,5 +17,5 @@
     <button>Create a new Timesheet</button>
 </form:form>
 </body>
-<button type="button" onclick="window.location='${pageContext.request.contextPath}'">Back to Homepage</button>
+<button type="button" onclick="window.location='${pageContext.request.contextPath}/index.jsp'">Back to Homepage</button>
 </html>

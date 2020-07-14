@@ -40,6 +40,6 @@
 <form:form action="${pageContext.request.contextPath}/counter/deleteWeeklyData/${paySlip.weekEndingDate}">
     <input type="submit" value="Delete WeeklyData"/>
 </form:form>
-<button type="button" onclick="window.location='${pageContext.request.contextPath}'">Back to Homepage</button>
+<button type="button" onclick="window.location='${pageContext.request.contextPath}/index.jsp'">Back to Homepage</button>
 </body>
 </html>

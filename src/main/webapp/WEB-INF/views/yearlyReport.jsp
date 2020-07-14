@@ -30,6 +30,6 @@
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.netPay}"/></td>
     </tr>
 </table>
-<button type="button" onclick="window.location='${pageContext.request.contextPath}'">Back to Homepage</button>
+<button type="button" onclick="window.location='${pageContext.request.contextPath}/index.jsp'">Back to Homepage</button>
 </body>
 </html>
