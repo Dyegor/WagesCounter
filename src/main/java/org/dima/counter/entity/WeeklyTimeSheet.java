@@ -18,7 +18,7 @@ public class WeeklyTimeSheet {
         setDailyReportsList(dailyReportList);
 
         getDailyReportsList().get(0).setDay("Monday");
-        getDailyReportsList().get(1).setDay("Thursday");
+        getDailyReportsList().get(1).setDay("Tuesday");
         getDailyReportsList().get(2).setDay("Wednesday");
         getDailyReportsList().get(3).setDay("Thursday");
         getDailyReportsList().get(4).setDay("Friday");
