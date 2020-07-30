@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+
 @Controller
 @RequestMapping("/counter")
 public class CounterController {
@@ -36,7 +39,8 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/addingWeeklyData", method = RequestMethod.POST)
-    public String addingWeeklyData(@ModelAttribute WeeklyTimeSheet weeklyTimeSheet, @ModelAttribute PaySlip weeklyPaySlip) {
+    public String addingWeeklyData(@ModelAttribute @NotEmpty @Valid WeeklyTimeSheet weeklyTimeSheet
+            , @ModelAttribute @NotEmpty @Valid PaySlip weeklyPaySlip) {
         counterService.addTimeSheet(weeklyTimeSheet);
         counterService.addPaySlip(weeklyPaySlip, weeklyTimeSheet);
         return "redirect:/counter/success";
@@ -55,7 +59,7 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/showPaySlip")
-    public String getPaySlipByDate(@RequestParam("weekEndingDate") String weekEndingDate, Model model) {
+    public String getPaySlipByDate(@NotEmpty @RequestParam ("weekEndingDate") String weekEndingDate, Model model) {
         model.addAttribute("paySlip", counterService.getPaySlipByDate(weekEndingDate));
         return "paySlipDetails";
     }
@@ -74,7 +78,7 @@ public class CounterController {
     }
 
     @RequestMapping(value = "/deleteWeeklyData/{weekEndingDate}")
-    public String deleteWeeklyData(@PathVariable("weekEndingDate") String weekEndingDate) {
+    public String deleteWeeklyData(@NotEmpty @PathVariable ("weekEndingDate") String weekEndingDate) {
         return counterService.deleteWeeklyData(weekEndingDate);
     }
 }
