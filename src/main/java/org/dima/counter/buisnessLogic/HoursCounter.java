@@ -20,7 +20,13 @@ public class HoursCounter {
         }
 
         long difference = java.time.Duration.between(time1, time2).toMinutes();
-        return (double) difference / 60;
+        double amountOfHours = (double) difference / 60;
+
+        if (amountOfHours >= 6.5) {
+            amountOfHours -= 0.5;
+        }
+
+        return amountOfHours;
     }
 
     public static double calculateTotalHours(DailyReport dailyReport, WeeklyTimeSheet weeklyTimeSheet) {
