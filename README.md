@@ -1,19 +1,72 @@
 # Wages Counter
 
-The application is in the process of development. The app will allow to store and review information about staff working hours, wages and taxes.
+People who work different number of hours per week often pay different tax and insurance contributions. It often happens
+ that a few months after the beginning of the financial year, an employee may not know what percentage he paid and 
+ whether he can expect that part of the tax paid will be refunded at the end of the year. 
+ Wages Counter App helps you keep accurate hours and automatically calculates taxes and ACC deductions for each work week. 
+ The App also allows you to generate an annual report to find out how the amount of taxes paid differs from the correct amount 
+ based on the total annual income.
+ 
+Stored data can be updated and deleted by user
 
 ## Description
 
 The application stores working hours worked by each employee per week.
  
-After approval by supervisors, the following parameters are automatically calculated for each employee:
-* Total earnings
-* Tax to pay
-* Net amount to pay
+The following parameters are calculated automatically for each employee:
+* Total working hours
+* Gross earnings
+* Tax paid
+* ACC Levy
+* Total Earnings
 
-Extra features:
-Annual report. A full annual report showing the difference between taxes paid and the amount of taxes calculated at the current date. 
-Tax return. Ability to check out whether an employee is eligible to get tax return during the fiscal year.
+## What's inside
 
-Comming features:
-Users' access level. Access to information will be based on user permissions.
+Project is based on the Spring Boot framework and includes the following technologies:
+* Maven
+* Spring Core
+* Spring Data JPA
+* Tomcat
+* MySQL
+* JSP
+* JUnit
+
+## Steps to run the application on a local machine using H2 in-memory database:
+### 1. Use following URL to create a new project from version control in Intellij Idea:
+```
+https://github.com/Dyegor/WagesCounter.git
+```
+### 2. Right click on project in Idea and then Maven -> Generate Sources and Update Folders
+
+### 3. Update database credential and other configuration in src/main/java/resources/application.properties 
+```
+spring.datasource.url=jdbc:h2:mem:wages_db
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=
+spring.datasource.password=
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+spring.h2.console.settings.trace=false
+spring.h2.console.settings.web-allow-others=true
+
+spring.h2.console.enabled=true
+
+spring.jpa.hibernate.ddl-auto=create-drop
+
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+```
+MySQL and web deployment configurations also available in a file
+
+### 4. Right click on Application.java file -> Run as Java Application
+
+### 5. Once application started index page will be available at:
+```http://localhost:8080/index.jsp```
+
+### 6. In order to create executable jar change following in pom.xml:
+```<packaging>war</packaging>``` 
+to
+```<packaging>jar</packaging>```
+
+and then run from terminal:
+```mvn clean package```
