@@ -33,6 +33,8 @@ Project is based on the Spring Boot framework and includes the following technol
 * JSP
 * JUnit
 
+Current configuration uses H2 database, if you want to use MySQL instead you need to change corresponding settings in application.properties file
+
 ## Steps to run the application on a local machine using H2 in-memory database:
 ### 1. Use following URL to create a new project from version control in Intellij Idea:
 ```
