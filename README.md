@@ -73,7 +73,7 @@ to
 and then run from terminal:
 ```mvn clean package```
 
-## Screenshots:
+# Screenshots:
 Adding hours form:
 
 ![1](https://user-images.githubusercontent.com/18030933/89379895-bf953580-d74a-11ea-8d14-7c3ebb8d2175.jpg)
