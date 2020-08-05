@@ -21,7 +21,7 @@
 </head>
 <body>
 <form:form method="post" action="${pageContext.request.contextPath}/counter/updateWeeklyData/" modelAttribute="timeSheet">
-    <label>Week Ending: ${timeSheet.weekEndingDate}</label> <br> <br>
+    <h2>Time Sheet for Week ended: ${timeSheet.weekEndingDate}</h2>
     <form:input type="hidden" path="weekEndingDate"/>
     <label>Hourly Rate: </label>
     <form:input type="text" path="hourlyRate"/>

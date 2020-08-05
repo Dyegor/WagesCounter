@@ -15,6 +15,7 @@
     <title>PaySlip period: ${paySlip.weekEndingDate}</title>
 </head>
 <body>
+<h2>PaySlip period: ${paySlip.weekEndingDate}</h2>
 <table>
     <tr>
         <th>Total Hours</th>

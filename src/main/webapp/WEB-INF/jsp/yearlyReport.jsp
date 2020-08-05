@@ -14,6 +14,7 @@
     <title>Yearly Report</title>
 </head>
 <body>
+<h2>Yearly Earnings Report:</h2>
 <table>
     <tr>
         <th>Total Hours</th>
