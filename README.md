@@ -9,6 +9,8 @@ People who work different number of hours per week often pay different tax and i
  
 Stored data can be updated and deleted by user
 
+**Current working version of the application deployed on AWS and available to review [at this link](http://wagescounter-env.eba-8ma2t9ue.ap-southeast-2.elasticbeanstalk.com/)**
+
 ## Description
 
 The application stores working hours worked by each employee per week.
@@ -70,3 +72,16 @@ to
 
 and then run from terminal:
 ```mvn clean package```
+
+## Screenshots:
+Adding hours form:
+
+![1](https://user-images.githubusercontent.com/18030933/89379895-bf953580-d74a-11ea-8d14-7c3ebb8d2175.jpg)
+
+Caclulated weekly payslip:
+
+![2](https://user-images.githubusercontent.com/18030933/89379985-e8b5c600-d74a-11ea-896f-b1808e42d517.jpg)
+
+Saved timesheet:
+
+![3](https://user-images.githubusercontent.com/18030933/89379995-ed7a7a00-d74a-11ea-8015-f56ecaa80d07.jpg)
