@@ -87,3 +87,9 @@ Caclulated weekly payslip:
 Saved timesheet:
 
 ![3](https://user-images.githubusercontent.com/18030933/89379995-ed7a7a00-d74a-11ea-8015-f56ecaa80d07.jpg)
+
+AnnualReport:
+
+![4](https://user-images.githubusercontent.com/18030933/89504650-78777500-d81c-11ea-8e86-4f01f3d02fd5.jpg)
+
+
