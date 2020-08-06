@@ -18,6 +18,8 @@ public interface CounterService {
 
     PaySlip getYearlyPayments();
 
+    double calculateCorrectPaye(double totalGrossEarnings);
+
     void updateTimeSheet(WeeklyTimeSheet weeklyTimeSheet);
 
     void updatePaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet);

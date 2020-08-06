@@ -22,6 +22,8 @@
         <th>Tax Paid</th>
         <th>ACC</th>
         <th>Total Earnings</th>
+        <th>Correct Tax Amount</th>
+        <th>Return Tax Balance</th>
     </tr>
     <tr>
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.totalHours}"/></td>
@@ -29,6 +31,8 @@
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.paye}"/></td>
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.accAmount}"/></td>
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.netPay}"/></td>
+        <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${correctPaye}"/></td>
+        <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.paye - correctPaye}"/></td>
     </tr>
 </table>
 <button type="button" onclick="window.location='${pageContext.request.contextPath}/index.jsp'">Back to Homepage</button>

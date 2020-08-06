@@ -1,6 +1,7 @@
 package org.dima.counter.service;
 
 import org.dima.counter.buisnessLogic.HoursCounter;
+import org.dima.counter.buisnessLogic.WagesCalculator;
 import org.dima.counter.dao.CounterDao;
 import org.dima.counter.entity.DailyReport;
 import org.dima.counter.entity.WeeklyTimeSheet;
@@ -58,6 +59,11 @@ public class CounterServiceImpl implements CounterService {
         PaySlip paymentSummary = new PaySlip();
         paymentSummary.populateYearlyPaySlip(paymentSummary, allWeeklyPayments);
         return paymentSummary;
+    }
+
+    @Override
+    public double calculateCorrectPaye(double totalGrossEarnings) {
+        return WagesCalculator.calculatePaye(totalGrossEarnings / 52);
     }
 
     @Override

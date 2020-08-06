@@ -66,8 +66,10 @@ public class CounterController {
 
     @RequestMapping(value = "/yearlyReport")
     public String getYearlyReport(Model model) {
-        model.addAttribute("paymentSummary", counterService.getYearlyPayments());
-        return "yearlyReport";
+        PaySlip yearlyPayslip = counterService.getYearlyPayments();
+        model.addAttribute("paymentSummary", yearlyPayslip);
+        model.addAttribute("correctPaye", counterService.calculateCorrectPaye(yearlyPayslip.getGrossEarnings()));
+        return "annualReport";
     }
 
     @RequestMapping(value = "/updateWeeklyData/")
