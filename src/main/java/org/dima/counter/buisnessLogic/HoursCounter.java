@@ -29,17 +29,20 @@ public class HoursCounter {
         return amountOfHours;
     }
 
-    public static double calculateTotalHours(DailyReport dailyReport, WeeklyTimeSheet weeklyTimeSheet) {
+    public static void calculateHours(DailyReport dailyReport, WeeklyTimeSheet weeklyTimeSheet) {
         double dailyHours = dailyReport.getHoursDone();
-        double totalHours = weeklyTimeSheet.getTotalHours();
+        double normalHours = weeklyTimeSheet.getNormalHours();
+        double overTimeHours = weeklyTimeSheet.getOverTimeHours();
 
-        if (dailyReport.getDay().equals("Saturday") || dailyReport.getDay().equals("Sunday") || totalHours > 45) {
-            totalHours += dailyHours * 1.5;
-        } else if ((totalHours + dailyHours) > 45) {
-            totalHours = 45 + (totalHours + dailyHours - 45) * 1.5;
+        if (dailyReport.getDay().equals("Saturday") || dailyReport.getDay().equals("Sunday") || normalHours >= 45) {
+            overTimeHours += dailyHours;
+        } else if ((normalHours + dailyHours) > 45) {
+            overTimeHours = normalHours + dailyHours - 45;
+            normalHours = 45;
         } else {
-            totalHours += dailyHours;
+            normalHours += dailyHours;
         }
-        return totalHours;
+        weeklyTimeSheet.setNormalHours(normalHours);
+        weeklyTimeSheet.setOverTimeHours(overTimeHours);
     }
 }

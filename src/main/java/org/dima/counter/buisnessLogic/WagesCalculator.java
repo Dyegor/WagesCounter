@@ -4,8 +4,8 @@ import org.dima.counter.entity.PaySlip;
 
 public class WagesCalculator {
 
-    public static double calculateGrossEarnings(double totalHours, double hourlyRate) {
-        return totalHours * hourlyRate;
+    public static double calculateGrossEarnings(PaySlip weeklyPayment) {
+        return (weeklyPayment.getNormalHours() + weeklyPayment.getOverTimeHours() * 1.5) * weeklyPayment.getHourlyRate();
     }
 
     public static double calculatePaye(double grossEarnings) {
