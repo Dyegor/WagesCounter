@@ -7,7 +7,8 @@ public class WeeklyTimeSheet {
 
     private List<DailyReport> dailyReportsList;
     private String weekEndingDate;
-    private double totalHours;
+    private double normalHours;
+    private double overTimeHours;
     private double hourlyRate;
 
     public WeeklyTimeSheet() {
@@ -42,12 +43,20 @@ public class WeeklyTimeSheet {
         this.weekEndingDate = weekEndingDate;
     }
 
-    public double getTotalHours() {
-        return totalHours;
+    public double getNormalHours() {
+        return normalHours;
     }
 
-    public void setTotalHours(double totalHours) {
-        this.totalHours = totalHours;
+    public void setNormalHours(double normalHours) {
+        this.normalHours = normalHours;
+    }
+
+    public double getOverTimeHours() {
+        return overTimeHours;
+    }
+
+    public void setOverTimeHours(double overTimeHours) {
+        this.overTimeHours = overTimeHours;
     }
 
     public double getHourlyRate() {

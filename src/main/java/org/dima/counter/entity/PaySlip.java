@@ -16,7 +16,8 @@ public class PaySlip {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String weekEndingDate;
-    private double totalHours;
+    private double normalHours;
+    private double overTimeHours;
     private double hourlyRate;
     private double grossEarnings;
     private double paye;
@@ -39,9 +40,21 @@ public class PaySlip {
         this.weekEndingDate = weekEndingDate;
     }
 
-    public double getTotalHours() { return totalHours; }
+    public double getNormalHours() {
+        return normalHours;
+    }
 
-    public void setTotalHours(double totalHours) { this.totalHours = totalHours; }
+    public void setNormalHours(double normalHours) {
+        this.normalHours = normalHours;
+    }
+
+    public double getOverTimeHours() {
+        return overTimeHours;
+    }
+
+    public void setOverTimeHours(double overTimeHours) {
+        this.overTimeHours = overTimeHours;
+    }
 
     public double getHourlyRate() {
         return hourlyRate;
@@ -84,7 +97,7 @@ public class PaySlip {
     }
 
     public void populateWeek(PaySlip weeklyPayment) {
-        double grossEarnings = WagesCalculator.calculateGrossEarnings(weeklyPayment.getTotalHours(), weeklyPayment.getHourlyRate());
+        double grossEarnings = WagesCalculator.calculateGrossEarnings(weeklyPayment);
         weeklyPayment.setGrossEarnings(grossEarnings);
         weeklyPayment.setPaye(WagesCalculator.calculatePaye(grossEarnings));
         weeklyPayment.setAccAmount(WagesCalculator.calculateAcc(grossEarnings));
@@ -93,7 +106,8 @@ public class PaySlip {
 
     public void populateYearlyPaySlip(PaySlip yearlyPaySlip, List<PaySlip> allWeeklyPayments) {
         for (PaySlip weeklyPaySlip : allWeeklyPayments) {
-            yearlyPaySlip.setTotalHours(yearlyPaySlip.getTotalHours() + weeklyPaySlip.getTotalHours());
+            yearlyPaySlip.setNormalHours(yearlyPaySlip.getNormalHours() + weeklyPaySlip.getNormalHours());
+            yearlyPaySlip.setOverTimeHours(yearlyPaySlip.getOverTimeHours() + weeklyPaySlip.getOverTimeHours());
             yearlyPaySlip.setAccAmount(yearlyPaySlip.getAccAmount() + weeklyPaySlip.getAccAmount());
             yearlyPaySlip.setGrossEarnings(yearlyPaySlip.getGrossEarnings() + weeklyPaySlip.getGrossEarnings());
             yearlyPaySlip.setNetPay(yearlyPaySlip.getNetPay() + weeklyPaySlip.getNetPay());
