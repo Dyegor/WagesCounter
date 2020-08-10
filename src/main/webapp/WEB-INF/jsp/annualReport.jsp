@@ -11,13 +11,14 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css"/>
-    <title>Yearly Report</title>
+    <title>Annual Report</title>
 </head>
 <body>
-<h2>Yearly Earnings Report:</h2>
+<h2>Annual Earnings Report:</h2>
 <table>
     <tr>
-        <th>Total Hours</th>
+        <th>Normal Hours</th>
+        <th>Overtime Hours</th>
         <th>Gross Earnings</th>
         <th>Tax Paid</th>
         <th>ACC</th>
@@ -26,7 +27,8 @@
         <th>Return Tax Balance</th>
     </tr>
     <tr>
-        <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.totalHours}"/></td>
+        <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.normalHours}"/></td>
+        <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.overTimeHourss}"/></td>
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.grossEarnings}"/></td>
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.paye}"/></td>
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.accAmount}"/></td>
@@ -35,6 +37,7 @@
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paymentSummary.paye - correctPaye}"/></td>
     </tr>
 </table>
+<br>
 <button type="button" onclick="window.location='${pageContext.request.contextPath}/index.jsp'">Back to Homepage</button>
 </body>
 </html>

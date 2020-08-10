@@ -27,7 +27,8 @@ public class CounterServiceImpl implements CounterService {
 
     @Override
     public void addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
-        weeklyPaySlip.setTotalHours(weeklyTimeSheet.getTotalHours());
+        weeklyPaySlip.setNormalHours(weeklyTimeSheet.getNormalHours());
+        weeklyPaySlip.setOverTimeHours(weeklyTimeSheet.getOverTimeHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
         counterDao.addPaySlip(weeklyPaySlip);
     }
@@ -36,7 +37,7 @@ public class CounterServiceImpl implements CounterService {
     public WeeklyTimeSheet getTimeSheetByDate(String weekEndingDate, double hourlyRate) {
         WeeklyTimeSheet weeklyTimeSheet = counterDao.getTimeSheetByDate(weekEndingDate);
         for (DailyReport dailyReport : weeklyTimeSheet.getDailyReportsList()) {
-            weeklyTimeSheet.setTotalHours(HoursCounter.calculateTotalHours(dailyReport, weeklyTimeSheet));
+            HoursCounter.calculateHours(dailyReport, weeklyTimeSheet);
         }
         weeklyTimeSheet.setHourlyRate(hourlyRate);
         weeklyTimeSheet.setWeekEndingDate(weekEndingDate);
@@ -76,7 +77,8 @@ public class CounterServiceImpl implements CounterService {
 
     @Override
     public void updatePaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
-        weeklyPaySlip.setTotalHours(weeklyTimeSheet.getTotalHours());
+        weeklyPaySlip.setNormalHours(weeklyTimeSheet.getNormalHours());
+        weeklyPaySlip.setOverTimeHours(weeklyTimeSheet.getOverTimeHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
         counterDao.updatePaySlip(weeklyPaySlip);
     }

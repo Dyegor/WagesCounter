@@ -18,7 +18,8 @@
 <h2>PaySlip period: ${paySlip.weekEndingDate}</h2>
 <table>
     <tr>
-        <th>Total Hours</th>
+        <th>Normal Hours</th>
+        <th>Overtime Hours</th>
         <th>Hourly Rate</th>
         <th>Gross Earnings</th>
         <th>Tax Paid</th>
@@ -26,7 +27,8 @@
         <th>Total Earnings</th>
     </tr>
     <tr>
-        <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.totalHours}"/></td>
+        <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.normalHours}"/></td>
+        <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.overTimeHours}"/></td>
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.hourlyRate}"/></td>
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.grossEarnings}"/></td>
         <td style="text-align: center"><fmt:formatNumber type="number" maxFractionDigits="2" value="${paySlip.paye}"/></td>

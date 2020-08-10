@@ -101,9 +101,11 @@ public class CounterDaoImpl implements CounterDao {
     @Transactional
     public void updatePaySlip(PaySlip weeklyPayment) {
         Session session = entityManager.unwrap(Session.class);
-        Query query = session.createQuery("UPDATE PaySlip wp set wp.totalHours = :totalHours, wp.grossEarnings = :grossEarnings, " +
-                "wp.paye = :paye, wp.accAmount = :accAmount, wp.netPay = :netPay where wp.weekEndingDate = :endingDate");
-        query.setParameter("totalHours", weeklyPayment.getTotalHours());
+        Query query = session.createQuery("UPDATE PaySlip wp set wp.normalHours = :normalHours, wp.overTimeHours = " +
+                ":overTimeHours, wp.grossEarnings = :grossEarnings, wp.paye = :paye, wp.accAmount = :accAmount" +
+                ", wp.netPay = :netPay where wp.weekEndingDate = :endingDate");
+        query.setParameter("normalHours", weeklyPayment.getNormalHours());
+        query.setParameter("overTimeHours", weeklyPayment.getOverTimeHours());
         query.setParameter("grossEarnings", weeklyPayment.getGrossEarnings());
         query.setParameter("paye", weeklyPayment.getPaye());
         query.setParameter("accAmount", weeklyPayment.getAccAmount());
