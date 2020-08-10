@@ -78,18 +78,18 @@ and then run from terminal:
 # Screenshots:
 Adding hours form:
 
-![1](https://user-images.githubusercontent.com/18030933/89379895-bf953580-d74a-11ea-8d14-7c3ebb8d2175.jpg)
+![1](https://user-images.githubusercontent.com/18030933/89760605-d66bcb80-db40-11ea-9c55-be6933bf81fa.jpg)
 
-Caclulated weekly payslip:
+Calculated weekly payslip:
 
-![2](https://user-images.githubusercontent.com/18030933/89379985-e8b5c600-d74a-11ea-896f-b1808e42d517.jpg)
+![2](https://user-images.githubusercontent.com/18030933/89760611-d8358f00-db40-11ea-9553-652a022ae1f5.jpg)
 
 Saved timesheet:
 
-![3](https://user-images.githubusercontent.com/18030933/89379995-ed7a7a00-d74a-11ea-8015-f56ecaa80d07.jpg)
+![3](https://user-images.githubusercontent.com/18030933/89760614-d966bc00-db40-11ea-9f87-6a5b6b306e53.jpg)
 
 AnnualReport:
 
-![4](https://user-images.githubusercontent.com/18030933/89504650-78777500-d81c-11ea-8e86-4f01f3d02fd5.jpg)
+![4](https://user-images.githubusercontent.com/18030933/89760616-da97e900-db40-11ea-9180-710971b73b89.jpg)
 
 
