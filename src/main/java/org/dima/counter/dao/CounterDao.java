@@ -9,6 +9,8 @@ import java.util.List;
 public interface CounterDao {
     void addTimeSheet(DailyReport dailyReport);
 
+    boolean checkExistingRecords(WeeklyTimeSheet weeklyTimeSheet, String DBName);
+
     WeeklyTimeSheet getTimeSheetByDate(String weekEndingDate);
 
     void updateTimeSheet(DailyReport dailyReport);

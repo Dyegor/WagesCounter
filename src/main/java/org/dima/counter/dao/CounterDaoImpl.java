@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -18,6 +19,12 @@ public class CounterDaoImpl implements CounterDao {
     @Autowired
     private EntityManager entityManager;
 
+    @Override
+    public boolean checkExistingRecords(WeeklyTimeSheet weeklyTimeSheet, String DBName) {boolean exists = true;
+        long result = (long) entityManager.createQuery("SELECT COUNT (*) from " + DBName + " dr where dr.weekEndingDate" +
+                " = :endingDate").setParameter("endingDate", weeklyTimeSheet.getWeekEndingDate()).getSingleResult();
+        return result != 7;
+    }
 
     @Override
     @Transactional
@@ -59,8 +66,8 @@ public class CounterDaoImpl implements CounterDao {
         Session session = entityManager.unwrap(Session.class);
         Query query = session.createQuery("delete from DailyReport dr where dr.weekEndingDate = :endingDate");
         query.setParameter("endingDate", weekEndingDate);
-        int result = query.executeUpdate();
-        if (result == 0) {
+        query.uniqueResult();
+        if (query.uniqueResult() == null) {
             return "incorrectInput";
         } else {
             return "success";
