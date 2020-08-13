@@ -41,8 +41,9 @@ public class CounterController {
     @RequestMapping(value = "/addingWeeklyData", method = RequestMethod.POST)
     public String addingWeeklyData(@ModelAttribute @NotEmpty @Valid WeeklyTimeSheet weeklyTimeSheet
             , @ModelAttribute @NotEmpty @Valid PaySlip weeklyPaySlip) {
-        counterService.addTimeSheet(weeklyTimeSheet);
-        counterService.addPaySlip(weeklyPaySlip, weeklyTimeSheet);
+        if (!counterService.addTimeSheet(weeklyTimeSheet) || !counterService.addPaySlip(weeklyPaySlip, weeklyTimeSheet)) {
+            return "weekExists";
+        }
         return "redirect:/counter/success";
     }
 

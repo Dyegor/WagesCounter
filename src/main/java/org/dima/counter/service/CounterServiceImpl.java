@@ -18,19 +18,27 @@ public class CounterServiceImpl implements CounterService {
     private CounterDao counterDao;
 
     @Override
-    public void addTimeSheet(WeeklyTimeSheet weeklyTimeSheet) {
+    public boolean addTimeSheet(WeeklyTimeSheet weeklyTimeSheet) {
+        if (!counterDao.checkExistingRecords(weeklyTimeSheet, "DailyReport")) {
+            return false;
+        }
         for (DailyReport dailyReport : weeklyTimeSheet.getDailyReportsList()) {
             dailyReport.populateDailyReport(dailyReport, weeklyTimeSheet);
             counterDao.addTimeSheet(dailyReport);
         }
+        return true;
     }
 
     @Override
-    public void addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
+    public boolean addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
+        if (!counterDao.checkExistingRecords(weeklyTimeSheet, "PaySlip")) {
+            return false;
+        }
         weeklyPaySlip.setNormalHours(weeklyTimeSheet.getNormalHours());
         weeklyPaySlip.setOverTimeHours(weeklyTimeSheet.getOverTimeHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
         counterDao.addPaySlip(weeklyPaySlip);
+        return true;
     }
 
     @Override

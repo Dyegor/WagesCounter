@@ -6,9 +6,9 @@ import org.dima.counter.entity.PaySlip;
 import java.util.List;
 
 public interface CounterService {
-    void addTimeSheet(WeeklyTimeSheet weeklyTimeSheet);
+    boolean addTimeSheet(WeeklyTimeSheet weeklyTimeSheet);
 
-    void addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet);
+    boolean addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet);
 
     WeeklyTimeSheet getTimeSheetByDate(String weekEndingDate, double hourlyRate);
 
