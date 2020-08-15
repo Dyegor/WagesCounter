@@ -1,14 +1,26 @@
 package org.dima.counter.buisnessLogic;
 
+import org.dima.counter.entity.PaySlip;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WagesCalculatorTest {
 
+    private static PaySlip weeklyPayment;
+
+    @BeforeAll
+    static void setUp() {
+        weeklyPayment = new PaySlip();
+        weeklyPayment.setNormalHours(123);
+        weeklyPayment.setOverTimeHours(456);
+        weeklyPayment.setHourlyRate(789);
+    }
+
     @Test
     void calculateGrossEarnings() {
-        assertEquals(70077626, WagesCalculator.calculateGrossEarnings(1234, 56789), "Should return ACC amount");
+        assertEquals(636723, WagesCalculator.calculateGrossEarnings(weeklyPayment), "Should return ACC amount");
     }
 
     @Test

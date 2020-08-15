@@ -17,20 +17,21 @@ class HoursCounterTest {
         dailyReport = new DailyReport();
         dailyReport.setStartTime("10:30");
         dailyReport.setFinishTime("22:30");
-        dailyReport.setHoursDone(5);
         dailyReport.setDay("Saturday");
 
         weeklyTimeSheet = new WeeklyTimeSheet();
-        weeklyTimeSheet.setTotalHours(40);
     }
 
     @Test
     void calculateAmountOfHours() {
-        assertEquals(12, HoursCounter.calculateAmountOfHours(dailyReport), "Returns calculated amount of hours");
+        assertEquals(11.5, HoursCounter.calculateAmountOfHours(dailyReport), "Returns calculated amount of hours");
     }
 
     @Test
-    void calculateTotalHours() {
-        assertEquals(47.5, HoursCounter.calculateTotalHours(dailyReport, weeklyTimeSheet), "Returns calculated total hours");
+    void calculateHours() {
+        dailyReport.setHoursDone(HoursCounter.calculateAmountOfHours(dailyReport));
+        HoursCounter.calculateHours(dailyReport, weeklyTimeSheet);
+        assertEquals(0, weeklyTimeSheet.getNormalHours(), "Returns calculated normal hours");
+        assertEquals(11.5, weeklyTimeSheet.getOverTimeHours(), "Returns calculated overtime hours");
     }
 }
