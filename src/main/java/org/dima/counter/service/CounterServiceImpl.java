@@ -18,27 +18,32 @@ public class CounterServiceImpl implements CounterService {
     private CounterDao counterDao;
 
     @Override
-    public boolean addTimeSheet(WeeklyTimeSheet weeklyTimeSheet) {
-        if (!counterDao.checkExistingRecords(weeklyTimeSheet, "DailyReport")) {
+    public boolean checkExistingRecords(WeeklyTimeSheet weeklyTimeSheet) {
+        if (!counterDao.checkExistingRecords(weeklyTimeSheet, "DailyReport")
+                || !counterDao.checkExistingRecords(weeklyTimeSheet, "PaySlip")) {
             return false;
-        }
-        for (DailyReport dailyReport : weeklyTimeSheet.getDailyReportsList()) {
-            dailyReport.populateDailyReport(dailyReport, weeklyTimeSheet);
-            counterDao.addTimeSheet(dailyReport);
         }
         return true;
     }
 
     @Override
-    public boolean addPaySlip(PaySlip weeklyPaySlip, WeeklyTimeSheet weeklyTimeSheet) {
-        if (!counterDao.checkExistingRecords(weeklyTimeSheet, "PaySlip")) {
-            return false;
+    public WeeklyTimeSheet addTimeSheet(WeeklyTimeSheet weeklyTimeSheet) {
+        for (DailyReport dailyReport : weeklyTimeSheet.getDailyReportsList()) {
+            dailyReport.populateDailyReport(dailyReport, weeklyTimeSheet);
+            counterDao.addTimeSheet(dailyReport);
         }
+        return weeklyTimeSheet;
+    }
+
+    @Override
+    public void addPaySlip(WeeklyTimeSheet weeklyTimeSheet) {
+        PaySlip weeklyPaySlip = new PaySlip();
+        weeklyPaySlip.setWeekEndingDate(weeklyTimeSheet.getWeekEndingDate());
+        weeklyPaySlip.setHourlyRate(weeklyTimeSheet.getHourlyRate());
         weeklyPaySlip.setNormalHours(weeklyTimeSheet.getNormalHours());
         weeklyPaySlip.setOverTimeHours(weeklyTimeSheet.getOverTimeHours());
         weeklyPaySlip.populateWeek(weeklyPaySlip);
         counterDao.addPaySlip(weeklyPaySlip);
-        return true;
     }
 
     @Override
