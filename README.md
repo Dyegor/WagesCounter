@@ -9,8 +9,6 @@ People who work different number of hours per week often pay different tax and i
  
 Stored data can be updated and deleted by user
 
-**Current working version of the application deployed on AWS and available to review [at this link](http://wagescounter-env.eba-8ma2t9ue.ap-southeast-2.elasticbeanstalk.com/)**
-
 ## Description
 
 The application stores working hours worked by each employee per week.
