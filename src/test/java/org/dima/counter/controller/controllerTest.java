@@ -6,6 +6,7 @@ import org.dima.counter.entity.PaySlip;
 import org.dima.counter.entity.WeeklyTimeSheet;
 import org.dima.counter.service.CounterService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,7 @@ public class controllerTest {
     }
 
     @Test
+    @Disabled("for demonstration purposes")
     public void testAddingWeeklyData() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/counter/addingWeeklyData").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(weeklyTimeSheet))).andExpect(status().isOk()).andReturn();
